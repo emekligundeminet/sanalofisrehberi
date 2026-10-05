@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+@theme {
+  --color-zemin: #ffffff;
+  --color-yuzey: #f7f8fa;
+  --color-baslik: #111827;
+  --color-metin: #1f2937;
+  --color-soluk: #6b7280;
+  --color-cizgi: #e5e7eb;
+  --color-vurgu: #1a56db;
+  --color-vurgu-koyu: #1e429f;
+  --color-olumlu: #047857;
+  --color-dikkat: #b45309;
+  --color-rozet: #eef2ff;
+  --color-rozet-metin: #1e429f;
+
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --shadow-*: initial;
+  --shadow-kart: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.06);
+  --blur-*: initial;
+}
+
+@layer base {
+  html {
+    background: var(--color-zemin);
+    color: var(--color-metin);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: var(--color-baslik);
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: 30px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+
+    @media (width >= 48rem) {
+      font-size: 40px;
+      line-height: 48px;
+    }
+  }
+
+  h2 {
+    font-size: 24px;
+    line-height: 1.25;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+
+    @media (width >= 48rem) {
+      font-size: 28px;
+    }
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.35;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  a {
+    text-underline-offset: 0.18em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-vurgu);
+    outline-offset: 2px;
+  }
+
+  summary {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  [id] {
+    scroll-margin-top: 24px;
+  }
+}
+
+@utility kap {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 16px;
+
+  @media (width >= 48rem) {
+    padding-inline: 24px;
+  }
+}
+
+@utility kucuk {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-soluk);
+}
+
+@utility rakam {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+@utility metin-link {
+  color: var(--color-vurgu);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--color-vurgu) 35%, transparent);
+
+  &:hover {
+    color: var(--color-vurgu-koyu);
+    text-decoration-color: currentColor;
+  }
+}
+
+.harita-il {
+  fill: var(--color-cizgi);
+  stroke: var(--color-zemin);
+  stroke-width: 0.8;
+  stroke-linejoin: round;
+  transition: fill 120ms ease;
+}
+
+.harita-il[data-durum="pasif"]:hover {
+  fill: #d1d5db;
+}
+
+.harita-il[data-durum="aktif"] {
+  fill: var(--color-vurgu);
+}
+
+a:hover > .harita-il[data-durum="aktif"],
+a:focus-visible > .harita-il[data-durum="aktif"] {
+  fill: var(--color-vurgu-koyu);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .harita-il {
+    transition: none;
+  }
+}
