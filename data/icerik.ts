@@ -682,7 +682,7 @@ Ekibiniz her gün aynı yerde çalışıyorsa ya da müşterileriniz sizi habers
     yukariCik: "Yukarı çık",
     menu: [
       { href: "/#iller", etiket: "İller" },
-      { href: "/sanal-ofis-secim-rehberi", etiket: "Seçim Rehberi" },
+      { href: "/sanal-ofis-secim-rehberi", etiket: "Sanal Ofis Rehberi" },
       { href: "/hakkinda", etiket: "Hakkımızda" },
       { href: "/iletisim", etiket: "İletişim" },
     ],
