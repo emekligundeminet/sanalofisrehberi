@@ -143,6 +143,7 @@ export function rehberSemasi(): Dugum {
       { ad: icerik.ilSayfasi.breadcrumbAnasayfa, yol: "/" },
       { ad: metin.breadcrumb, yol: "/sanal-ofis-secim-rehberi" },
     ]),
+    sssSayfasi(url, metin.sss),
   ]);
 }
 

@@ -18,13 +18,13 @@ export const site = {
 export const icerik = {
   anasayfa: {
     meta: {
-      title: "Sanal Ofis Firmaları ve Fiyatları – İl İl Rehber",
+      title: "Sanal Ofis Firmaları ve Fiyatları 2026 – İl İl Karşılaştırma",
       description:
-        "Türkiye'de il il sanal ofis firmaları: adres, yayımlanmış fiyat, toplantı odası ve tebligat bildirimi bilgileri tek tabloda.",
+        "Türkiye'deki sanal ofis firmalarını il il karşılaştırın: yayımlanan fiyatlar, adresler, toplantı odası ve tebligat bilgileri tek tabloda.",
     },
-    h1: "İl il sanal ofis firmaları ve fiyatları",
+    h1: "Sanal Ofis Firmaları ve Fiyatları",
     heroAciklama:
-      "Firmaların kendi sitelerinde yayımladığı fiyat, adres ve hizmet bilgileri il il tek tabloda.",
+      "Sanal ofis firmalarının kendi sitelerinde yayımladığı fiyat, adres ve hizmet bilgileri il il tek tabloda.",
     haritaBaslik: "Türkiye il haritası",
     haritaLinkEtiketi: (il: string, firmaSayisi: number) =>
       `${il}: ${firmaSayisi} sanal ofis firması`,
@@ -37,30 +37,33 @@ export const icerik = {
       yakinda: "Yakında",
       firmaSayisi: (firmaSayisi: number) => `${firmaSayisi} firma`,
     },
-    illerBaslik: "İllere göre sanal ofis",
+    illerBaslik: "İllere Göre Sanal Ofis Firmaları",
+    enDusukEtiket: "Yayımlanan en düşük aylık fiyat",
+    fiyatTablosu: {
+      il: "İl",
+      firma: "Firma sayısı",
+      yayimlayan: "Fiyat yayımlayan",
+      enDusuk: "Yayımlanan en düşük aylık fiyat",
+      link: "Firmaları gör →",
+      bos: "—",
+    },
     ilFirmaSayisi: (firmaSayisi: number) => `${firmaSayisi} firma karşılaştırıldı`,
     fiyatYok: "Yayımlanmış aylık fiyat yok",
     ilKartLink: "Firmaları karşılaştır →",
     yakindaBaslik: "Yakında eklenecek iller",
     yakindaEtiket: "Yakında",
     sanalOfisNedirBaslik: "Sanal ofis nedir?",
-    seoMetni: `## Türkiye'de Sanal Ofis Fiyatları Nasıl Karşılaştırılır?
+    seoMetni: `## Sanal Ofis Fiyatları 2026
 
-Bu rehberde {ilSayisi} ilden {toplamFirma} sanal ofis sağlayıcısının fiyatını, adresini ve hizmet kapsamını tek tabloda topladık. Firmalar fiyatlarını farklı biçimlerde yayımlıyor: bazıları aylık, bazıları yıllık, bazıları günlük fiyat gösteriyor; bir kısmı ise fiyat yayımlamıyor ve teklif üzerinden çalışıyor. Bu yüzden il sayfalarında her firmanın fiyatını kendi yayımladığı biçimde ve kaynağıyla birlikte gösteriyoruz.
+Bu rehberde {ilSayisi} ilden {toplamFirma} sanal ofis firmasının fiyatını, adresini ve hizmet kapsamını karşılaştırıyoruz. Firmalar fiyatlarını farklı biçimlerde yayımlıyor: bazıları aylık, bazıları yıllık, bazıları günlük fiyat gösteriyor; bir kısmı ise fiyat yayımlamıyor ve teklif üzerinden çalışıyor. Aşağıdaki tabloda her ilde fiyat yayımlayan firma sayısı ve yayımlanan en düşük aylık fiyat yer alıyor.
 
 ### Fiyatı karşılaştırırken nelere bakmalı?
-
-- Fiyatın aylık mı yıllık mı olduğu ve KDV'nin dahil olup olmadığı
-- Tebligatın aynı gün mü bildirildiği
-- Toplantı odasının pakete dahil mi, ek ücretli mi olduğu
-- Minimum sözleşme süresi ve erken fesih koşulları
-- Adreste gün boyu resepsiyon bulunup bulunmadığı
 
 ### Hangi şehirde sanal ofis almalıyım?
 
 Sanal ofis adresinin yaşadığınız şehirde olması gerekmez. Müşterileriniz ağırlıklı olarak hangi şehirdeyse ya da hangi şehrin adresi işiniz için daha güçlü bir izlenim bırakıyorsa orayı seçebilirsiniz. Ankara, kamu kurumlarıyla çalışan şirketler için; İstanbul, ticari ağırlık ve müşteri yoğunluğu için; İzmir ve Bursa ise bölgesel pazarda faaliyet gösteren şirketler için sık tercih ediliyor.
 
-Seçim yapmadan önce ayrıntılı kontrol listesi için [sanal ofis seçim rehberimize](/sanal-ofis-secim-rehberi) göz atabilirsiniz.`,
+Adres, tebligat ve sözleşme maddelerini tek tek kontrol etmek için hazırladığımız [sanal ofis seçim rehberi](/sanal-ofis-secim-rehberi), teklif almadan önce sorulacak soruları sıralıyor.`,
     sanalOfisNedir: [
       "Sanal ofis, fiziksel bir çalışma alanı kiralamadan şirketiniz için yasal iş adresi edinmenizi sağlayan hizmettir. Bu adres vergi levhanızda, ticaret sicil kaydınızda ve faturalarınızda yer alır. Adınıza gelen posta, kargo ve tebligatlar adresteki resepsiyonda teslim alınır ve size bildirilir. Çoğu sağlayıcı, yüz yüze görüşmeler için saatlik toplantı odası da sunar.",
       "Fiyatlar şehre, binanın konumuna ve pakete dahil hizmetlere göre değişir. Bu rehberde her il için firmaların kendi sitelerinde yayımladığı fiyatları, adresleri ve hizmetleri tek tabloda topluyoruz.",
@@ -127,7 +130,7 @@ Seçim yapmadan önce ayrıntılı kontrol listesi için [sanal ofis seçim rehb
     sonGuncelleme: (tarih: string) => `Son güncelleme: ${tarih}`,
     karsilastirildi: (firmaSayisi: number) => `${firmaSayisi} firma karşılaştırıldı`,
     nasilSiraladikLink: "Nasıl sıraladık?",
-    hizliBakisBaslik: "Hızlı bakış",
+    hizliBakisBaslik: (il: string) => `Öne çıkan ${il} sanal ofis firmaları`,
     detaylar: "Detaylar ↓",
     siraRozeti: (sira: number) => `${sira}. sırada`,
     oneCikan: "Öne çıkan",
@@ -188,7 +191,7 @@ Seçim yapmadan önce ayrıntılı kontrol listesi için [sanal ofis seçim rehb
   iller: {
     ankara: {
       giris: [
-        "Ankara'da sanal ofis sağlayıcılarının büyük kısmı Çankaya'da toplanıyor. Dumlupınar Bulvarı (Eskişehir Yolu) çevresindeki yeni iş merkezleri, Balgat, Kızılay ve Gaziosmanpaşa en çok tercih edilen bölgeler. Kamu kurumlarına, vergi dairelerine ve mali müşavirlere yakınlık, şirket adresinin Çankaya'da olmasını pratik hale getiriyor.",
+        "Ankara sanal ofis firmaları büyük ölçüde Çankaya'da toplanıyor. Dumlupınar Bulvarı (Eskişehir Yolu) çevresindeki yeni iş merkezleri, Balgat, Kızılay ve Gaziosmanpaşa en çok tercih edilen bölgeler. Kamu kurumlarına, vergi dairelerine ve mali müşavirlere yakınlık, şirket adresinin Çankaya'da olmasını pratik hale getiriyor.",
         "Aşağıda Ankara'da sanal ofis hizmeti veren firmaları adres, yayımlanmış fiyat, toplantı odası ve tebligat bildirimi açısından karşılaştırdık. Bazı firmalar fiyatını aylık, bazıları yıllık ya da günlük olarak gösteriyor; bazıları ise fiyat yayımlamıyor ve teklif üzerinden çalışıyor.",
       ],
       semtler: [
@@ -502,52 +505,129 @@ Bursa'da sanal ofis adresiyle şahıs şirketi, limited şirket ya da anonim şi
 
   rehber: {
     meta: {
-      title: "Sanal Ofis Seçim Rehberi: Nelere Dikkat Edilmeli?",
+      title: "Sanal Ofis Seçim Rehberi 2026: Dikkat Edilmesi Gerekenler",
       description:
-        "Sanal ofis seçerken adres, tebligat bildirimi, pakete dahil hizmetler, sözleşme maddeleri ve faaliyet uygunluğu için kontrol listesi.",
+        "Sanal ofis seçerken dikkat edilmesi gerekenler: adres, tebligat, toplantı odası, fiyat ve sözleşme maddeleri için kontrol listesi ve sorulacak sorular.",
     },
-    h1: "Sanal ofis seçim rehberi",
-    breadcrumb: "Seçim rehberi",
+    h1: "Sanal Ofis Seçim Rehberi (2026)",
+    breadcrumb: "Sanal ofis seçim rehberi",
+    okuma: "7 dk okuma",
+    kontrolBaslik: "Hızlı kontrol listesi",
+    ilSayfalariBaslik: "İl sayfaları",
+    sssBaslik: "Sıkça sorulan sorular",
     guncellemeTarihi: "Ekim 2026",
     guncellemeISO: "2026-10-05",
-    bolumler: [
+    giris: [
+      "Sanal ofis kiralamak birkaç gün içinde tamamlanan bir işlem, ama yanlış seçilen bir adresin sonuçları yıllarca sürebilir. Tebligatı geç bildirilen bir şirket süre kaçırabilir, yoklamada adreste kimseyi bulamayan bir vergi dairesi işlem başlatabilir, minimum süresi uzun bir sözleşme şirketinizi istemediğiniz bir adrese bağlayabilir.",
+      "Bu rehber, sanal ofis seçerken dikkat edilmesi gerekenleri sağlayıcıya sormanız gereken sorularla birlikte sıralıyor. Firmaları ve fiyatları karşılaştırmak için [sanal ofis firmaları](/) listesini, belirli bir şehir için [Ankara](/ankara-sanal-ofis), [İstanbul](/istanbul-sanal-ofis), [İzmir](/izmir-sanal-ofis) ve [Bursa](/bursa-sanal-ofis) sayfalarını kullanabilirsiniz.",
+    ],
+    kontrol: [
+      "Adreste gün boyu resepsiyon var",
+      "Tebligat aynı gün bildiriliyor",
+      "Bildirim kanalı (e-posta, telefon, mesaj) belli",
+      "Adresin bağlı olduğu vergi dairesi biliniyor",
+      "Fiyatın aylık mı yıllık mı olduğu ve KDV durumu yazılı",
+      "Pakete dahil hizmetler yazılı",
+      "Toplantı odası koşulları ve ücreti belli",
+      "Minimum sözleşme süresi ve fesih şartı yazılı",
+      "Faaliyetiniz sanal ofise uygun",
+      "Adres, vergi levhası ve ticaret sicilde kullanılabiliyor",
+    ],
+    govde: `## Sanal Ofis Seçerken Nelere Dikkat Edilmeli?
+
+Sanal ofis seçerken yalnızca fiyata ya da adresin prestijine bakmak yeterli değil. Adres şirketinizin resmi kayıtlarında yer alacak; vergi dairesi yoklamayı bu adreste yapacak, mahkemeler ve kurumlar tebligatı bu adrese gönderecek. Bu yüzden asıl soru, adresin arkasında düzenli çalışan bir operasyon olup olmadığı.
+
+### Sağlayıcının güvenilirliği ve referansları
+
+Sağlayıcının ne kadar süredir bu hizmeti verdiğine, binada gerçekten bir ofisi olup olmadığına ve müşteri yorumlarına bakın. Google'daki işletme profili, gerçek fotoğraflar ve yorumlar bu konuda iyi bir başlangıç noktası. Adres yalnızca bir posta kutusundan ibaretse, resmi işlemlerde sorun yaşama ihtimaliniz artar.
+
+### Adres ve konum
+
+Adresin konumu iki şeyi etkiler: müşterilerinizde bıraktığı izlenim ve yüz yüze görüşmelerin kolaylığı. Adresi yalnızca vergi levhası ve ticaret sicil için kullanacaksanız merkezi olmayan, daha uygun fiyatlı bir adres yeterli olabilir. Kartvizitte ve tekliflerde kullanacak, müşteri kabul edecekseniz iş merkezindeki resepsiyonlu bir adres daha doğru bir seçim olur.
+
+Adresin bağlı olduğu vergi dairesini de sorun. Muhasebecinizin sık çalıştığı vergi dairesiyle aynı yerde olmak işlemleri kolaylaştırabilir.
+
+### Tebligat, posta ve kargo hizmetleri
+
+Sanal ofisin en kritik hizmeti tebligat takibidir. Resmi tebligatlarda süreler çoğunlukla teslim tarihinden itibaren işlemeye başlar; tebligat adresinize teslim edildiği gün süre başlamış olur. Gelen evrakın aynı gün mü, haftalık mı bildirildiğini ve bildirimin hangi kanaldan yapıldığını mutlaka sorun.
+
+> Dikkat: Tebligatı haftalık toplu bildirim yapan bir sağlayıcıda, itiraz veya cevap süresi olan bir yazıyı birkaç gün geç öğrenebilirsiniz. Süreli işlemleri olan şirketler için aynı gün bildirim şarttır.
+
+Kargo ve posta için de aynı soruları sorun: Paketler ne kadar süre saklanıyor, başka bir adrese yönlendirme yapılıyor mu, bunun ücreti var mı?
+
+### Toplantı odası ve ofis kullanımı
+
+Müşteri görüşmesi yapacaksanız toplantı odasının koşulları belirleyici olur. Bazı paketlerde aylık belirli bir saat toplantı odası dahil, bazılarında oda saatlik ücretle kiralanıyor, bazı sağlayıcılarda ise toplantı odası hiç yok. Rezervasyonun nasıl yapıldığını, kaç gün önceden gerektiğini ve odanın kaç kişilik olduğunu öğrenin.
+
+### Fiyat ve paket içeriği
+
+Aynı fiyata görünen iki paket çok farklı hizmetler içerebilir. Telefon karşılama, sekreterya, kargo yönlendirme ve toplantı odası saati gibi kalemlerin pakete dahil mi, ek ücretli mi olduğunu yazılı olarak isteyin. Fiyatın aylık mı yıllık mı gösterildiğini ve KDV'nin dahil olup olmadığını kontrol edin; yıllık peşin ödeme şartıyla gösterilen fiyatlar aylık ödemede yükselebilir.
+
+### Sözleşme koşulları
+
+Sözleşmede adresin vergi levhası ve ticaret sicil kaydında kullanılabileceği açıkça yazmalı. Bunun yanında dahil olan hizmetler, tebligat bildirim yöntemi, toplantı odası koşulları, minimum süre, otomatik yenileme ve fesih şartları da sözleşmede yer almalı.
+
+Sözleşme bittiğinde şirket adresinizi değiştirmeniz gerekir. Adres değişikliği ticaret siciline tescil ettirilip vergi dairesine bildirilmezse, tebligatlar kullanmadığınız adrese gitmeye devam eder.
+
+## En Ucuz Sanal Ofis Her Zaman Doğru Tercih mi?
+
+Hayır. Çok düşük fiyatlı paketler çoğunlukla yalnızca yasal adres içerir; tebligat bildirimi, toplantı odası ve resepsiyon hizmeti ya hiç yoktur ya da ek ücretlidir. Kampanyalı giriş fiyatları ilk dönemden sonra yükselebilir. Fiyatı değerlendirirken paketin içeriğini ve sözleşme süresini birlikte düşünün; aylık birkaç yüz liralık fark, kaçırılan tek bir tebligatın maliyetinin yanında küçük kalır.
+
+## Sanal Ofis Kiralama Süreci Adım Adım
+
+1. İhtiyacınızı belirleyin: yalnızca yasal adres mi, yoksa toplantı odası ve telefon karşılama da mı gerekiyor?
+2. Faaliyetinizin sanal ofise uygun olup olmadığını kontrol edin.
+3. En az üç sağlayıcıdan yazılı teklif alın ve paket içeriklerini yan yana koyun.
+4. Mümkünse adresi yerinde görün; resepsiyonu ve binanın girişini kontrol edin.
+5. Sözleşmeyi imzalayın ve muhasebecinize iletin; şirket kuruluşu ya da adres değişikliği bu sözleşmeyle başlar.
+
+## Sağlayıcıya Sormanız Gereken Sorular
+
+| Soru | Neden önemli? |
+|---|---|
+| Tebligat aynı gün mü bildiriliyor? | Süreli resmi yazılarda gecikme hak kaybına yol açabilir. |
+| Adres hangi vergi dairesine bağlı? | Muhasebe ve vergi işlemlerini planlamayı kolaylaştırır. |
+| Fiyat aylık mı, yıllık mı? KDV dahil mi? | Gerçek maliyeti karşılaştırabilmeniz için gerekir. |
+| Toplantı odası pakete dahil mi? | Yüz yüze görüşmelerin ek maliyetini belirler. |
+| Minimum sözleşme süresi ve fesih şartı nedir? | Adres değiştirmek istediğinizde ne kadar bağlı kalacağınızı gösterir. |
+| Yoklamada süreç nasıl yürüyor? | Vergi levhasının sorunsuz düzenlenmesi için önemlidir. |
+
+## Faaliyetiniz Sanal Ofise Uygun mu?
+
+Sanal ofis, fiziksel bir işyerine ihtiyaç duymayan faaliyetler için uygundur. Danışmanlık, yazılım, e-ticaret, dış ticaret, serbest meslek ve uzaktan çalışan ekipler bu modelle rahatlıkla çalışabilir.
+
+İmalat, depolama, perakende mağaza ve işyeri açma ruhsatı gerektiren hizmetler ise fiziksel bir işyeri ister; bu faaliyetler sanal ofis adresinde yürütülemez. Emin değilseniz NACE kodunuzu sağlayıcıyla ve muhasebecinizle birlikte kontrol edin.
+
+## Klasik Ofis mi, Sanal Ofis mi?
+
+Ekibiniz her gün aynı yerde çalışıyorsa ya da müşterileriniz sizi habersiz ziyaret edebiliyorsa klasik ofis gerekir. Klasik ofiste kiranın yanında depozito, emlakçı komisyonu, aidat, faturalar ve mal sahibi şahıssa kira stopajı da ödenir. İşinizi uzaktan yürütüyor ve yalnızca resmi bir adrese ihtiyaç duyuyorsanız sanal ofis bu giderlerin tamamını ortadan kaldırır; toplantı gerektiğinde oda saatlik kiralanır.`,
+    sss: [
       {
-        baslik: "Sanal ofis seçmeden önce ihtiyacınızı netleştirin",
-        paragraflar: [
-          "Sanal ofisle ilgili kararların çoğu, aslında neye ihtiyacınız olduğuna bağlı. Yalnızca vergi levhası ve ticaret sicil için bir adres mi arıyorsunuz, yoksa düzenli olarak müşteri görüşmesi yapacak mısınız? İlk durumda adres ve tebligat takibi yeterli; ikincisinde toplantı odasının koşulları belirleyici olur.",
-        ],
+        soru: "Sanal ofis firmasının güvenilir olduğunu nasıl anlarım?",
+        cevap:
+          "Sağlayıcının binada gerçek bir ofisi ve resepsiyonu olup olmadığına, ne kadar süredir hizmet verdiğine ve Google'daki işletme profilindeki yorumlara bakın. Sözleşme ve fatura vermeyen, adresi göstermekten kaçınan sağlayıcılardan uzak durun.",
       },
       {
-        baslik: "Adres gerçekten çalışan bir ofis mi?",
-        paragraflar: [
-          "Sanal ofis adresi kâğıt üzerinde bir adres değil, vergi dairesinin yoklama yapacağı ve tebligatların teslim edileceği bir yerdir. Sözleşmeden önce adreste bir resepsiyon olup olmadığını, mesai saatlerini ve binanın girişini kontrol edin. Mümkünse adresi bir kez yerinde görün.",
-        ],
+        soru: "Sanal ofis adresini kiralamadan önce görmeli miyim?",
+        cevap:
+          "Mümkünse evet. Binanın girişini, resepsiyonu ve mesai saatlerini yerinde görmek, yoklama ve tebligat süreçlerinin nasıl yürüyeceği hakkında en net bilgiyi verir.",
       },
       {
-        baslik: "Tebligat nasıl ve ne kadar sürede bildiriliyor?",
-        paragraflar: [
-          "Resmi tebligatlarda süreler çoğu zaman teslim tarihinden itibaren işlemeye başlar. Gelen evrakın aynı gün mü, haftalık mı bildirildiğini; bildirimin e-posta, WhatsApp ya da telefonla mı yapıldığını sorun. Geç bildirilen tek bir tebligat, süre kaçırmanıza yol açabilir.",
-        ],
+        soru: "Sanal ofis için kaç firmadan teklif almalıyım?",
+        cevap:
+          "En az üç. Tekliflerde fiyatın süresini, KDV durumunu, pakete dahil hizmetleri ve sözleşme koşullarını yazılı isteyin ve yan yana karşılaştırın.",
       },
       {
-        baslik: "Fiyata neler dahil?",
-        paragraflar: [
-          "Aynı görünen iki paket çok farklı hizmetler içerebilir. Telefon karşılama, kargo yönlendirme, toplantı odası saati ve sekreterlik gibi kalemlerin pakete dahil mi yoksa ek ücretli mi olduğunu yazılı olarak öğrenin. [Aylık ve yıllık fiyatları karşılaştırırken](/) KDV'nin dahil olup olmadığına dikkat edin.",
-        ],
+        soru: "Sanal ofis sağlayıcısı kapanırsa ne olur?",
+        cevap:
+          "Adres kullanım hakkınız sona erer ve şirket adresinizi değiştirmeniz gerekir. Bu yüzden köklü, binada gerçek bir operasyonu olan sağlayıcıları tercih etmek ve sözleşmede bu durumda nasıl bildirim yapılacağını yazdırmak önemlidir.",
       },
       {
-        baslik: "Sözleşmede bulunması gerekenler",
-        paragraflar: [
-          "Sözleşmede adresin vergi levhası ve ticaret sicil kaydında kullanılabileceği, hangi hizmetlerin dahil olduğu, tebligat bildirim yöntemi, toplantı odası koşulları ve fesih şartları açıkça yazmalı. Sözleşme bittiğinde şirket adresinizi değiştirmeniz gerektiğini unutmayın; aksi halde tebligatlar kullanmadığınız adrese gitmeye devam eder.",
-        ],
+        soru: "Sanal ofiste tebligat ile posta takibi aynı şey mi?",
+        cevap:
+          "Hayır. Posta takibi genel gönderileri kapsar; tebligat ise yasal süre başlatan resmi bir bildirimdir. Sözleşmede tebligatların nasıl teslim alınıp ne kadar sürede bildirileceği ayrıca yazmalı.",
       },
-      {
-        baslik: "Faaliyetiniz sanal ofise uygun mu?",
-        paragraflar: [
-          "İmalat, depolama, perakende satış ve işyeri açma ruhsatı gerektiren hizmetler fiziksel bir işyeri ister. Danışmanlık, yazılım, e-ticaret, serbest meslek ve uzaktan çalışan ekipler için sanal ofis çoğu zaman yeterlidir. Emin değilseniz NACE kodunuzu sağlayıcıyla birlikte kontrol edin.",
-        ],
-      },
-    ] satisfies Bolum[],
+    ] satisfies Soru[],
   },
 
   hakkinda: {
@@ -598,10 +678,12 @@ Bursa'da sanal ofis adresiyle şahıs şirketi, limited şirket ya da anonim şi
     anaMenu: "Ana menü",
     altMenu: "Alt menü",
     menuAc: "Menü",
+    yukariCik: "Yukarı çık",
     menu: [
       { href: "/#iller", etiket: "İller" },
       { href: "/sanal-ofis-secim-rehberi", etiket: "Seçim Rehberi" },
       { href: "/hakkinda", etiket: "Hakkımızda" },
+      { href: "/iletisim", etiket: "İletişim" },
     ],
     altBilgi: {
       rehberBaslik: "Rehber",

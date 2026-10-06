@@ -28,7 +28,7 @@ export function Icindekiler({ baslik, ogeler }: { baslik: string; ogeler: Icinde
 
   return (
     <nav aria-labelledby="icindekiler-baslik">
-      <p id="icindekiler-baslik" className="mb-3 text-[13px] font-semibold uppercase tracking-[0.06em] text-soluk">
+      <p id="icindekiler-baslik" className="mb-3 text-[13px] font-semibold text-soluk">
         {baslik}
       </p>
       <ul className="space-y-0.5 border-l border-cizgi text-[14px] leading-snug">

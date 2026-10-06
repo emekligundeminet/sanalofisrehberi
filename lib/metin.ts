@@ -31,21 +31,42 @@ export type MetinBlok =
   | { tur: "h2"; id: string; metin: string }
   | { tur: "h3"; metin: string }
   | { tur: "p"; metin: string }
-  | { tur: "ul"; maddeler: string[] };
+  | { tur: "ul"; maddeler: string[] }
+  | { tur: "ol"; maddeler: string[] }
+  | { tur: "alinti"; metin: string }
+  | { tur: "tablo"; basliklar: string[]; satirlar: string[][] };
 
 export function metinBloklari(metin: string): MetinBlok[] {
   const bloklar: MetinBlok[] = [];
-  let liste: string[] | null = null;
+  let liste: { tur: "ul" | "ol"; maddeler: string[] } | null = null;
+  let tablo: string[] | null = null;
   const listeKapat = () => {
-    if (liste) bloklar.push({ tur: "ul", maddeler: liste });
+    if (liste) bloklar.push(liste);
     liste = null;
+  };
+  const tabloKapat = () => {
+    if (!tablo) return;
+    const satirlar = tablo
+      .map((satir) => satir.split("|").slice(1, -1).map((hucre) => hucre.trim()))
+      .filter((hucreler) => hucreler.length > 0 && !hucreler.every((hucre) => /^:?-+:?$/.test(hucre)));
+    const [basliklar, ...govde] = satirlar;
+    if (basliklar) bloklar.push({ tur: "tablo", basliklar, satirlar: govde });
+    tablo = null;
   };
   for (const ham of metin.split("\n")) {
     const satir = ham.trim();
     if (!satir) {
       listeKapat();
+      tabloKapat();
       continue;
     }
+    if (satir.startsWith("|")) {
+      listeKapat();
+      tablo = tablo ?? [];
+      tablo.push(satir);
+      continue;
+    }
+    tabloKapat();
     if (satir.startsWith("### ")) {
       listeKapat();
       bloklar.push({ tur: "h3", metin: satir.slice(4) });
@@ -57,15 +78,32 @@ export function metinBloklari(metin: string): MetinBlok[] {
       bloklar.push({ tur: "h2", id: idOlustur(baslik), metin: baslik });
       continue;
     }
+    if (satir.startsWith("> ")) {
+      listeKapat();
+      bloklar.push({ tur: "alinti", metin: satir.slice(2) });
+      continue;
+    }
+    if (/^\d+\.\s/.test(satir)) {
+      if (!liste || liste.tur !== "ol") {
+        if (liste) bloklar.push(liste);
+        liste = { tur: "ol", maddeler: [] };
+      }
+      liste.maddeler.push(satir.replace(/^\d+\.\s/, ""));
+      continue;
+    }
     if (satir.startsWith("- ")) {
-      liste = liste ?? [];
-      liste.push(satir.slice(2));
+      if (!liste || liste.tur !== "ul") {
+        if (liste) bloklar.push(liste);
+        liste = { tur: "ul", maddeler: [] };
+      }
+      liste.maddeler.push(satir.slice(2));
       continue;
     }
     listeKapat();
     bloklar.push({ tur: "p", metin: satir });
   }
   listeKapat();
+  tabloKapat();
   return bloklar;
 }
 

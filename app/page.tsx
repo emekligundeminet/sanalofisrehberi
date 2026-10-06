@@ -12,7 +12,7 @@ import { iller } from "@/data/iller";
 import { aramaAnahtari, metinBloklari, type MetinBlok } from "@/lib/metin";
 import { anaSayfaSemasi } from "@/lib/schema";
 import { sayfaMetadata } from "@/lib/seo";
-import { aktifIller, enDusukAylikFiyat } from "@/lib/veri";
+import { aktifIller, enDusukYayimlananAylik, type AktifIl } from "@/lib/veri";
 
 const metin = icerik.anasayfa;
 const nedirIkonlari: LucideIcon[] = [MapPin, Mail, Users];
@@ -34,7 +34,51 @@ function BilgiKarti({ Ikon, baslik, aciklama, mini }: { Ikon: LucideIcon; baslik
   );
 }
 
-function SeoMetni({ kaynak }: { kaynak: string }) {
+function FiyatTablosu({ iller }: { iller: AktifIl[] }) {
+  const sutun = metin.fiyatTablosu;
+  const th = "border-b border-cizgi bg-yuzey px-3 py-3 text-left text-[13px] font-semibold text-soluk first:pl-6 last:pr-6";
+  const td = "border-b border-cizgi px-3 py-4 align-top first:pl-6 last:pr-6";
+  return (
+    <div className="mt-6 max-w-[760px] overflow-x-auto rounded-xl border border-cizgi">
+      <table className="w-full min-w-[720px] border-separate border-spacing-0 text-[14px] leading-snug">
+        <thead>
+          <tr>
+            <th scope="col" className={th}>{sutun.il}</th>
+            <th scope="col" className={th}>{sutun.firma}</th>
+            <th scope="col" className={th}>{sutun.yayimlayan}</th>
+            <th scope="col" className={th}>{sutun.enDusuk}</th>
+            <th scope="col" className={th}>
+              <span className="sr-only">{sutun.link}</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody className="[&>tr:last-child>*]:border-b-0">
+          {iller.map((il) => {
+            const enDusuk = enDusukYayimlananAylik(il.firmalar);
+            const yayimlayan = il.firmalar.filter((firma) => firma.aylikFiyat !== "Yayımlanmamış").length;
+            return (
+              <tr key={il.slug}>
+                <th scope="row" className={`${td} text-left font-semibold text-baslik`}>{il.ad}</th>
+                <td className={`${td} tabular-nums`}>{il.firmalar.length}</td>
+                <td className={`${td} tabular-nums`}>{yayimlayan}</td>
+                <td className={`${td} font-semibold tabular-nums text-baslik`}>
+                  {enDusuk === null ? sutun.bos : `${enDusuk.toLocaleString("tr-TR")} TL`}
+                </td>
+                <td className={td}>
+                  <Link href={il.yol} className="whitespace-nowrap font-medium text-vurgu hover:text-vurgu-koyu">
+                    {sutun.link}
+                  </Link>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function SeoMetni({ kaynak, tablo }: { kaynak: string; tablo: React.ReactNode }) {
   const bloklar = metinBloklari(kaynak);
   const h2 = bloklar.find((b): b is Extract<MetinBlok, { tur: "h2" }> => b.tur === "h2");
   const h3ler = bloklar.filter((b): b is Extract<MetinBlok, { tur: "h3" }> => b.tur === "h3");
@@ -52,6 +96,8 @@ function SeoMetni({ kaynak }: { kaynak: string }) {
           <BaglantiliMetin metin={p.metin} />
         </p>
       ))}
+
+      {tablo}
 
       <h3 className="mt-8">{h3ler[0].metin}</h3>
       <ul className="mt-5 grid grid-cols-2 gap-4 lg:grid-cols-3">
@@ -74,8 +120,11 @@ function SeoMetni({ kaynak }: { kaynak: string }) {
 
 export const metadata: Metadata = sayfaMetadata({ ...metin.meta, yol: "/" });
 
+const KART_ILLERI = ["ankara", "istanbul", "izmir"];
+
 export default function AnaSayfa() {
   const aktif = aktifIller();
+  const kartlar = KART_ILLERI.flatMap((slug) => aktif.filter((il) => il.slug === slug));
   const aktifSluglar = new Set(aktif.map((il) => il.slug));
   const pasif = iller
     .filter((il) => !aktifSluglar.has(il.slug))
@@ -117,8 +166,8 @@ export default function AnaSayfa() {
       <div className="kap">
         <Bolum id="iller" baslik={metin.illerBaslik} className="mt-14">
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {aktif.map((il) => {
-              const fiyat = enDusukAylikFiyat(il.firmalar);
+            {kartlar.map((il) => {
+              const enDusuk = enDusukYayimlananAylik(il.firmalar);
               return (
                 <li key={il.slug}>
                   <Link
@@ -127,10 +176,13 @@ export default function AnaSayfa() {
                   >
                     <h3 className="group-hover:text-vurgu">{il.ad}</h3>
                     <p className="mt-1 kucuk">{metin.ilFirmaSayisi(il.firmalar.length)}</p>
-                    {fiyat && (
-                      <p className="mt-4 border-t border-cizgi pt-4 font-sans text-[22px] font-semibold leading-snug tracking-[-0.02em] text-baslik tabular-nums">
-                        {fiyat}
-                      </p>
+                    {enDusuk !== null && (
+                      <div className="mt-4 border-t border-cizgi pt-4">
+                        <p className="text-[13px] leading-snug text-soluk">{metin.enDusukEtiket}</p>
+                        <p className="mt-1 font-sans text-[22px] font-semibold leading-snug tracking-[-0.02em] text-baslik tabular-nums">
+                          {enDusuk.toLocaleString("tr-TR")} TL
+                        </p>
+                      </div>
                     )}
                     <span className="mt-4 text-[15px] font-medium text-vurgu">{metin.ilKartLink}</span>
                   </Link>
@@ -159,6 +211,7 @@ export default function AnaSayfa() {
           kaynak={metin.seoMetni
             .replaceAll("{ilSayisi}", String(aktif.length))
             .replaceAll("{toplamFirma}", String(aktif.reduce((n, il) => n + il.firmalar.length, 0)))}
+          tablo={<FiyatTablosu iller={aktif} />}
         />
 
         <div className="max-w-[760px] text-[16px] leading-[1.65]">

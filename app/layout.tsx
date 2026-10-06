@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { SiteAltBilgi } from "@/components/SiteAltBilgi";
 import { SiteBaslik } from "@/components/SiteBaslik";
+import { YukariCik } from "@/components/YukariCik";
 import { site } from "@/data/icerik";
 import "./globals.css";
 
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteBaslik />
         <main>{children}</main>
         <SiteAltBilgi />
+        <YukariCik />
       </body>
     </html>
   );

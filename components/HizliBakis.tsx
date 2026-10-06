@@ -5,11 +5,11 @@ import { OneCikanRozet, Rozet } from "./Rozet";
 
 const metin = icerik.ilSayfasi;
 
-export function HizliBakis({ firmalar }: { firmalar: Firma[] }) {
+export function HizliBakis({ il, firmalar }: { il: string; firmalar: Firma[] }) {
   return (
     <section id="hizli-bakis" aria-labelledby="hizli-bakis-baslik" className="rounded-xl bg-yuzey p-6">
-      <h2 id="hizli-bakis-baslik" className="text-[13px] font-semibold uppercase tracking-[0.08em] text-soluk md:text-[13px]">
-        {metin.hizliBakisBaslik}
+      <h2 id="hizli-bakis-baslik" className="text-[13px] font-semibold leading-snug text-soluk">
+        {metin.hizliBakisBaslik(il)}
       </h2>
       <ol className="mt-4 grid gap-4 md:grid-cols-3">
         {firmalar.map((f) => (

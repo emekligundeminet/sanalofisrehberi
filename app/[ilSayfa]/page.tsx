@@ -67,7 +67,7 @@ export default async function IlSayfasi({ params }: Props) {
   const il = await ilBul(params);
   const ilIcerik = icerik.iller[il.slug];
   const tarih = enGuncelTarih(il.firmalar).metin;
-  const digerIller = aktifIller().filter((d) => d.slug !== il.slug);
+  const digerIller = aktifIller().filter((d) => d.slug !== il.slug && d.slug !== "bursa");
 
   const rehber = ilIcerik.rehberMetni ? metinBloklari(rehberDoldur(ilIcerik.rehberMetni, il.firmalar)) : [];
   const sss = ilIcerik.sss.map((s) => ({
@@ -76,7 +76,7 @@ export default async function IlSayfasi({ params }: Props) {
   }));
 
   const icindekiler: IcindekilerOgesi[] = [
-    { id: "hizli-bakis", ad: metin.hizliBakisBaslik },
+    { id: "hizli-bakis", ad: metin.hizliBakisBaslik(il.ad) },
     { id: "karsilastirma", ad: metin.tabloBaslik },
     ...il.firmalar.map((f) => ({ id: f.slug, ad: `${siraNo(f.sira)} · ${f.ad}`, alt: true })),
     { id: "nasil-siraladik", ad: metin.nasilSiraladikBaslik },
@@ -115,7 +115,7 @@ export default async function IlSayfasi({ params }: Props) {
       </div>
 
       <div className="mt-8">
-        <HizliBakis firmalar={il.firmalar.slice(0, 3)} />
+        <HizliBakis il={il.ad} firmalar={il.firmalar.slice(0, 3)} />
       </div>
 
       <Bolum id="karsilastirma" baslik={metin.tabloBaslik}>
@@ -181,15 +181,24 @@ export default async function IlSayfasi({ params }: Props) {
               );
             }
             if (b.tur === "h3") return <h3 key={b.metin} className="mt-8 text-[20px]">{b.metin}</h3>;
-            if (b.tur === "ul") {
+            if (b.tur === "ul" || b.tur === "ol") {
+              const Etiket = b.tur === "ol" ? "ol" : "ul";
               return (
-                <ul key={b.maddeler[0]} className="mt-4 list-disc space-y-2 pl-5">
+                <Etiket key={b.maddeler[0]} className={`mt-4 space-y-2 pl-5 ${b.tur === "ol" ? "list-decimal" : "list-disc"}`}>
                   {b.maddeler.map((m) => (
                     <li key={m}><BaglantiliMetin metin={m} /></li>
                   ))}
-                </ul>
+                </Etiket>
               );
             }
+            if (b.tur === "alinti") {
+              return (
+                <p key={b.metin} className="mt-4 border-l-[3px] border-dikkat bg-[#FFFBEB] p-4">
+                  <BaglantiliMetin metin={b.metin} />
+                </p>
+              );
+            }
+            if (b.tur === "tablo") return null;
             return <p key={b.metin} className="mt-4"><BaglantiliMetin metin={b.metin} /></p>;
           })}
         </div>

@@ -40,6 +40,13 @@ export function mutlakUrl(yol: string): string {
   return yol === "/" ? site.url : `${site.url}${yol}`;
 }
 
+/** Kart ve il tablosu: doğrulama şartı yok, aylık sayı yayımlayanların en düşüğü. */
+export function enDusukYayimlananAylik(liste: Firma[]): number | null {
+  const sayilar = liste.flatMap((firma) => (firma.aylikMin === null ? [] : [firma.aylikMin]));
+  if (sayilar.length === 0) return null;
+  return Math.min(...sayilar);
+}
+
 export function enDusukAylikFiyat(liste: Firma[]): string | null {
   const sayilar = liste
     .filter((f) => f.aylikMin !== null && f.fiyatDogrulandi)
