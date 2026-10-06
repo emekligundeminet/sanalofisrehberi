@@ -36,16 +36,19 @@ function BilgiKarti({ Ikon, baslik, aciklama, mini }: { Ikon: LucideIcon; baslik
 
 function FiyatTablosu({ iller }: { iller: AktifIl[] }) {
   const sutun = metin.fiyatTablosu;
-  const th = "border-b border-cizgi bg-yuzey px-3 py-3 text-left text-[13px] font-semibold text-soluk first:pl-6 last:pr-6";
-  const td = "border-b border-cizgi px-3 py-4 align-top first:pl-6 last:pr-6";
+  const th = "border-b border-cizgi bg-yuzey px-2 py-2.5 text-left text-[13px] font-semibold leading-snug text-soluk first:pl-3 last:pr-3 sm:px-3 sm:py-3 sm:first:pl-6 sm:last:pr-6";
+  const td = "border-b border-cizgi px-2 py-3 align-top first:pl-3 last:pr-3 sm:px-3 sm:py-4 sm:first:pl-6 sm:last:pr-6";
+  const masaustu = "hidden md:table-cell";
+  const fiyatMetni = (enDusuk: number | null) => (enDusuk === null ? sutun.bos : `${enDusuk.toLocaleString("tr-TR")} TL`);
+
   return (
-    <div className="mt-6 max-w-[760px] overflow-x-auto rounded-xl border border-cizgi">
-      <table className="w-full min-w-[720px] border-separate border-spacing-0 text-[14px] leading-snug">
+    <div className="mt-6 max-w-[760px] overflow-hidden rounded-xl border border-cizgi">
+      <table className="w-full border-separate border-spacing-0 text-[13px] leading-snug sm:text-[14px]">
         <thead>
           <tr>
             <th scope="col" className={th}>{sutun.il}</th>
-            <th scope="col" className={th}>{sutun.firma}</th>
-            <th scope="col" className={th}>{sutun.yayimlayan}</th>
+            <th scope="col" className={`${th} ${masaustu}`}>{sutun.firma}</th>
+            <th scope="col" className={`${th} ${masaustu}`}>{sutun.yayimlayan}</th>
             <th scope="col" className={th}>{sutun.enDusuk}</th>
             <th scope="col" className={th}>
               <span className="sr-only">{sutun.link}</span>
@@ -54,18 +57,15 @@ function FiyatTablosu({ iller }: { iller: AktifIl[] }) {
         </thead>
         <tbody className="[&>tr:last-child>*]:border-b-0">
           {iller.map((il) => {
-            const enDusuk = enDusukYayimlananAylik(il.firmalar);
             const yayimlayan = il.firmalar.filter((firma) => firma.aylikFiyat !== "Yayımlanmamış").length;
             return (
               <tr key={il.slug}>
                 <th scope="row" className={`${td} text-left font-semibold text-baslik`}>{il.ad}</th>
-                <td className={`${td} tabular-nums`}>{il.firmalar.length}</td>
-                <td className={`${td} tabular-nums`}>{yayimlayan}</td>
-                <td className={`${td} font-semibold tabular-nums text-baslik`}>
-                  {enDusuk === null ? sutun.bos : `${enDusuk.toLocaleString("tr-TR")} TL`}
-                </td>
+                <td className={`${td} ${masaustu} tabular-nums`}>{il.firmalar.length}</td>
+                <td className={`${td} ${masaustu} tabular-nums`}>{yayimlayan}</td>
+                <td className={`${td} font-semibold tabular-nums text-baslik`}>{fiyatMetni(enDusukYayimlananAylik(il.firmalar))}</td>
                 <td className={td}>
-                  <Link href={il.yol} className="whitespace-nowrap font-medium text-vurgu hover:text-vurgu-koyu">
+                  <Link href={il.yol} className="font-medium text-vurgu hover:text-vurgu-koyu">
                     {sutun.link}
                   </Link>
                 </td>
@@ -100,7 +100,7 @@ function SeoMetni({ kaynak, tablo }: { kaynak: string; tablo: React.ReactNode })
       {tablo}
 
       <h3 className="mt-8">{h3ler[0].metin}</h3>
-      <ul className="mt-5 grid grid-cols-2 gap-4 lg:grid-cols-3">
+      <ul className="mt-5 grid grid-cols-1 gap-4 min-[520px]:grid-cols-2 lg:grid-cols-3">
         {metin.karsilastirmaKartlari.map((kart, i) => (
           <BilgiKarti key={kart.baslik} Ikon={karsilastirmaIkonlari[i]} baslik={kart.baslik} aciklama={kart.aciklama} />
         ))}
@@ -138,7 +138,7 @@ export default function AnaSayfa() {
         <div className="kap grid items-center gap-10 py-10 md:py-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-14">
           <div>
             <h1>{metin.h1}</h1>
-            <p className="mt-3 max-w-[48ch] text-[18px] text-soluk">{metin.heroAciklama}</p>
+            <p className="mt-3 max-w-[48ch] text-[16px] text-soluk sm:text-[18px]">{metin.heroAciklama}</p>
             <div className="mt-7">
               <IlArama
                 metin={{

@@ -24,50 +24,66 @@ export const metadata: Metadata = sayfaMetadata({ ...metin.meta, yol: YOL, tur: 
 
 function MetinTablosu({ basliklar, satirlar }: { basliklar: string[]; satirlar: string[][] }) {
   return (
-    <div className="mt-4 overflow-x-auto rounded-xl border border-cizgi">
-      <table className="w-full min-w-[520px] border-separate border-spacing-0 text-[14px] leading-snug">
-        <thead>
-          <tr>
-            {basliklar.map((baslik) => (
-              <th key={baslik} scope="col" className={th}>
-                {baslik}
-              </th>
+    <>
+      <div className="mt-4 grid gap-3 md:hidden">
+        {satirlar.map((satir) => (
+          <div key={satir.join(" | ")} className="rounded-xl border border-cizgi p-4">
+            <p className="text-[13px] text-soluk">{basliklar[0]}</p>
+            <p className="mt-1 font-semibold leading-snug text-baslik">{satir[0]}</p>
+            {satir.slice(1).map((hucre, i) => (
+              <div key={`${satir[0]}-${i}`} className="mt-3">
+                {basliklar[i + 1] && <p className="text-[13px] text-soluk">{basliklar[i + 1]}</p>}
+                <p className="mt-1 text-[15px] leading-snug">{hucre}</p>
+              </div>
             ))}
-          </tr>
-        </thead>
-        <tbody className="[&>tr:last-child>*]:border-b-0">
-          {satirlar.map((satir) => (
-            <tr key={satir.join(" | ")}>
-              {satir.map((hucre, i) =>
-                i === 0 ? (
-                  <th key={hucre} scope="row" className={`${td} text-left font-semibold text-baslik`}>
-                    {hucre}
-                  </th>
-                ) : (
-                  <td key={`${satir[0]}-${i}`} className={td}>
-                    {hucre}
-                  </td>
-                ),
-              )}
+          </div>
+        ))}
+      </div>
+      <div className="mt-4 hidden overflow-hidden rounded-xl border border-cizgi md:block">
+        <table className="w-full border-separate border-spacing-0 text-[14px] leading-snug">
+          <thead>
+            <tr>
+              {basliklar.map((baslik) => (
+                <th key={baslik} scope="col" className={th}>
+                  {baslik}
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody className="[&>tr:last-child>*]:border-b-0">
+            {satirlar.map((satir) => (
+              <tr key={satir.join(" | ")}>
+                {satir.map((hucre, i) =>
+                  i === 0 ? (
+                    <th key={hucre} scope="row" className={`${td} text-left font-semibold text-baslik`}>
+                      {hucre}
+                    </th>
+                  ) : (
+                    <td key={`${satir[0]}-${i}`} className={td}>
+                      {hucre}
+                    </td>
+                  ),
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
 
 function Govde({ blok }: { blok: MetinBlok }) {
   if (blok.tur === "h2") {
     return (
-      <h2 key={blok.id} id={blok.id} className="mt-10 text-[28px]">
+      <h2 key={blok.id} id={blok.id} className="mt-10">
         {blok.metin}
       </h2>
     );
   }
   if (blok.tur === "h3") {
     return (
-      <h3 key={blok.metin} className="mt-8 text-[20px]">
+      <h3 key={blok.metin} className="mt-8">
         {blok.metin}
       </h3>
     );
@@ -133,7 +149,7 @@ export default function RehberSayfasi() {
           ))}
         </div>
 
-        <div id="hizli-kontrol-listesi" className="mt-8 rounded-xl bg-yuzey p-6">
+        <div id="hizli-kontrol-listesi" className="mt-8 rounded-xl bg-yuzey p-4 sm:p-6">
           <p className="text-[18px] font-semibold leading-snug text-baslik">{metin.kontrolBaslik}</p>
           <ul className="mt-4 space-y-3">
             {metin.kontrol.map((madde) => (

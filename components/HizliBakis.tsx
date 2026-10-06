@@ -7,7 +7,7 @@ const metin = icerik.ilSayfasi;
 
 export function HizliBakis({ il, firmalar }: { il: string; firmalar: Firma[] }) {
   return (
-    <section id="hizli-bakis" aria-labelledby="hizli-bakis-baslik" className="rounded-xl bg-yuzey p-6">
+    <section id="hizli-bakis" aria-labelledby="hizli-bakis-baslik" className="rounded-xl bg-yuzey p-4 sm:p-6">
       <h2 id="hizli-bakis-baslik" className="text-[13px] font-semibold leading-snug text-soluk">
         {metin.hizliBakisBaslik(il)}
       </h2>

@@ -55,7 +55,7 @@ export const icerik = {
     sanalOfisNedirBaslik: "Sanal ofis nedir?",
     seoMetni: `## Sanal Ofis Fiyatları 2026
 
-Bu rehberde {ilSayisi} ilden {toplamFirma} sanal ofis firmasının fiyatını, adresini ve hizmet kapsamını karşılaştırıyoruz. Firmalar fiyatlarını farklı biçimlerde yayımlıyor: bazıları aylık, bazıları yıllık, bazıları günlük fiyat gösteriyor; bir kısmı ise fiyat yayımlamıyor ve teklif üzerinden çalışıyor. Aşağıdaki tabloda her ilde fiyat yayımlayan firma sayısı ve yayımlanan en düşük aylık fiyat yer alıyor.
+Bu rehberde {ilSayisi} ilden {toplamFirma} sanal ofis firmasının fiyatını, adresini ve hizmet kapsamını karşılaştırıyoruz. Firmalar fiyatlarını farklı biçimlerde yayımlıyor: bazıları aylık, bazıları yıllık, bazıları günlük fiyat gösteriyor; bir kısmı ise fiyat yayımlamıyor ve teklif üzerinden çalışıyor. Aşağıdaki tabloda her ilde yayımlanan en düşük aylık fiyat yer alıyor.
 
 ### Fiyatı karşılaştırırken nelere bakmalı?
 
@@ -678,6 +678,7 @@ Ekibiniz her gün aynı yerde çalışıyorsa ya da müşterileriniz sizi habers
     anaMenu: "Ana menü",
     altMenu: "Alt menü",
     menuAc: "Menü",
+    menuKapat: "Menüyü kapat",
     yukariCik: "Yukarı çık",
     menu: [
       { href: "/#iller", etiket: "İller" },

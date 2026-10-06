@@ -35,8 +35,44 @@ export function FirmaTablosu({ firmalar }: { firmalar: Firma[] }) {
 
   return (
     <div>
-    <div className="overflow-x-auto rounded-xl border border-cizgi">
-      <table className="w-full min-w-[720px] table-fixed border-separate border-spacing-0 text-[14px] leading-snug">
+    <ul className="grid gap-3 lg:hidden">
+      {firmalar.map((f) => {
+        const alanlar = [
+          [sutun.fiyat, f.fiyatGosterim],
+          [sutun.semt, semtKisa(f.semt)],
+          [sutun.toplanti, tabloMetni(f.toplantiOdasiKisa)],
+          [sutun.tebligat, tabloMetni(f.tebligatKisa)],
+        ] as const;
+        return (
+          <li key={f.slug} className={`rounded-xl border p-4 ${f.oneCikan ? "border-olumlu bg-[#F0FDF4]" : "border-cizgi"}`}>
+            <a href={`#${f.slug}`} className="flex items-center gap-2 font-semibold text-baslik hover:text-vurgu">
+              <Avatar ad={f.ad} />
+              <span className="min-w-0">{f.ad}</span>
+              {f.oneCikan && <OneCikanRozet kucuk />}
+            </a>
+            <dl className="mt-3 space-y-2 text-[14px] leading-snug">
+              {alanlar.map(([etiket, deger]) => (
+                <div key={etiket}>
+                  <dt className="text-[13px] text-soluk">{etiket}</dt>
+                  <dd className="text-baslik">{deger}</dd>
+                </div>
+              ))}
+            </dl>
+            <a
+              href={f.webSitesi}
+              target="_blank"
+              rel={disLinkRel(f.dofollow)}
+              aria-label={metin.tabloButonAria(f.ad)}
+              className="mt-3 inline-flex rounded-lg border border-vurgu px-3 py-1.5 text-[14px] font-medium text-vurgu hover:border-vurgu-koyu hover:bg-rozet hover:text-vurgu-koyu"
+            >
+              {metin.tabloButon}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+    <div className="hidden overflow-x-auto rounded-xl border border-cizgi lg:block">
+      <table className="w-full table-fixed border-separate border-spacing-0 text-[14px] leading-snug">
         <caption className="sr-only">{metin.tabloBaslik}</caption>
         <colgroup>
           <col className="w-[30%]" />
@@ -64,7 +100,7 @@ export function FirmaTablosu({ firmalar }: { firmalar: Firma[] }) {
             return (
             <tr key={f.slug}>
               <th scope="row" className={`${td} sticky left-0 z-[5] text-left text-[15px] font-semibold ${f.oneCikan ? zemin : ilkSutun}`}>
-                <a href={`#${f.slug}`} className="flex items-center gap-2 whitespace-nowrap text-baslik hover:text-vurgu">
+                <a href={`#${f.slug}`} className="flex items-center gap-2 text-baslik hover:text-vurgu">
                   <Avatar ad={f.ad} />
                   <span>{f.ad}</span>
                   {f.oneCikan && <OneCikanRozet kucuk />}

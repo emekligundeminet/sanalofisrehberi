@@ -50,16 +50,16 @@ export function IlArama({
       <ul id={listeId} aria-live="polite" className="mt-2 divide-y divide-cizgi rounded-lg border border-cizgi">
         {aktifSonuc.map((il) => (
           <li key={il.yol}>
-            <Link href={il.yol} className="flex items-center justify-between px-4 py-3 hover:bg-yuzey">
-              <span className="font-medium text-baslik">{il.ad}</span>
-              <span className="text-[14px] text-vurgu">{il.firmaSayisi} →</span>
+            <Link href={il.yol} className="flex items-center justify-between gap-3 px-4 py-3 hover:bg-yuzey">
+              <span className="min-w-0 font-medium text-baslik">{il.ad}</span>
+              <span className="shrink-0 text-[14px] text-vurgu">{il.firmaSayisi} →</span>
             </Link>
           </li>
         ))}
         {pasifSonuc.map((il) => (
-          <li key={il.ad} className="flex items-center justify-between px-4 py-3 text-soluk">
-            <span>{il.ad}</span>
-            <span className="text-[13px]">{metin.yakinda}</span>
+          <li key={il.ad} className="flex items-center justify-between gap-3 px-4 py-3 text-soluk">
+            <span className="min-w-0">{il.ad}</span>
+            <span className="shrink-0 text-[13px]">{metin.yakinda}</span>
           </li>
         ))}
         {aktifSonuc.length === 0 && pasifSonuc.length === 0 && (

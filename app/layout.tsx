@@ -27,6 +27,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   applicationName: site.ad,
   formatDetection: { telephone: false, address: false, email: false },
+  verification: { google: "gnQq1ulyAngU6vWlfyEB3cqFIhKAFCJwpk7SVD9f-_k" },
 };
 
 export const viewport: Viewport = {
