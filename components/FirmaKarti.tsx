@@ -1,8 +1,11 @@
 import { CircleCheck, Mail, Map as SemtIkon, MapPin, TriangleAlert, Users, type LucideIcon } from "lucide-react";
+import Link from "next/link";
 import type { Firma } from "@/data/firmalar";
 import { icerik } from "@/data/icerik";
 import { disLinkRel } from "@/lib/metin";
+import { firmaYolu } from "@/lib/veri";
 import { Fiyat } from "./Fiyat";
+import { KonseptIkon } from "./KonseptMarka";
 import { OneCikanRozet, Rozet } from "./Rozet";
 
 const kart = icerik.ilSayfasi.kart;
@@ -41,7 +44,16 @@ export function FirmaKarti({ firma }: { firma: Firma }) {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-            <h2>{firma.ad}</h2>
+            {firma.oneCikan && <KonseptIkon boyut={36} />}
+            <h2>
+              {firma.oneCikan && firma.profilVar ? (
+                <Link href={firmaYolu(firma.slug)} className="hover:text-vurgu">
+                  {firma.ad}
+                </Link>
+              ) : (
+                firma.ad
+              )}
+            </h2>
             <Rozet>{firma.rozet}</Rozet>
           </div>
         </div>
@@ -49,9 +61,15 @@ export function FirmaKarti({ firma }: { firma: Firma }) {
           <Fiyat fiyat={firma.fiyatGosterim} not={firma.fiyatNotu} boyut="text-[24px]" />
           <p className="mt-1.5 text-[13px] text-soluk">
             {kart.kaynakOnek}{" "}
-            <a href={firma.kaynakUrl} target="_blank" rel={rel} className="underline hover:text-vurgu">
-              {kart.kaynakLink}
-            </a>
+            {firma.oneCikan && firma.profilVar ? (
+              <Link href={firmaYolu(firma.slug)} className="underline hover:text-vurgu">
+                {kart.kaynakLink}
+              </Link>
+            ) : (
+              <a href={firma.kaynakUrl} target="_blank" rel={rel} className="underline hover:text-vurgu">
+                {kart.kaynakLink}
+              </a>
+            )}
             {kart.kaynakTarih(firma.guncellemeTarihi)}
           </p>
         </div>

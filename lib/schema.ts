@@ -1,6 +1,7 @@
 import type { Firma } from "@/data/firmalar";
 import { icerik, site } from "@/data/icerik";
-import { enGuncelTarih, mutlakUrl, type AktifIl } from "@/lib/veri";
+import { KONSEPT_IKON, KONSEPT_LOGO } from "@/components/KonseptMarka";
+import { enGuncelTarih, firmaYolu, ilSayfaSlug, mutlakUrl, type AktifIl } from "@/lib/veri";
 
 const DIL = "tr-TR";
 const WEB_ID = `${site.url}/#website`;
@@ -66,18 +67,33 @@ function sokakAdresi(adres: string): string | null {
   return adres;
 }
 
-function yerelIsletme(firma: Firma, ilAdi: string): Dugum {
+function postaAdresi(firma: Firma, ilAdi: string): Dugum {
   const sokak = sokakAdresi(firma.adres);
+  const postaKodu = firma.adres.match(/\b(\d{5})\b/)?.[1];
+  return {
+    "@type": "PostalAddress",
+    ...(sokak ? { streetAddress: sokak } : {}),
+    ...(postaKodu ? { postalCode: postaKodu } : {}),
+    addressLocality: firma.semt,
+    addressRegion: ilAdi,
+    addressCountry: "TR",
+  };
+}
+
+function markaGorselleri(firma: Firma): Dugum {
+  if (!firma.oneCikan) return {};
+  return {
+    logo: mutlakUrl(KONSEPT_LOGO),
+    image: mutlakUrl(KONSEPT_IKON),
+  };
+}
+
+function yerelIsletme(firma: Firma, ilAdi: string): Dugum {
   return {
     "@type": "LocalBusiness",
     name: firma.ad,
-    address: {
-      "@type": "PostalAddress",
-      ...(sokak ? { streetAddress: sokak } : {}),
-      addressLocality: firma.semt,
-      addressRegion: ilAdi,
-      addressCountry: "TR",
-    },
+    ...markaGorselleri(firma),
+    address: postaAdresi(firma, ilAdi),
     sameAs: firma.webSitesi,
   };
 }
@@ -113,7 +129,7 @@ export function ilSayfaSemasi(il: AktifIl, sorular: Soru[]): Dugum {
       itemListElement: il.firmalar.map((firma) => ({
         "@type": "ListItem",
         position: firma.sira,
-        url: `${url}#${firma.slug}`,
+        url: firma.oneCikan && firma.profilVar ? mutlakUrl(firmaYolu(firma.slug)) : `${url}#${firma.slug}`,
         item: yerelIsletme(firma, il.ad),
       })),
     },
@@ -122,6 +138,26 @@ export function ilSayfaSemasi(il: AktifIl, sorular: Soru[]): Dugum {
       { ad: icerik.ilSayfasi.breadcrumbIl(il.ad), yol: il.yol },
     ]),
     sssSayfasi(url, sorular),
+  ]);
+}
+
+export function firmaProfilSemasi(firma: Firma, ilAdi: string): Dugum {
+  const yol = firmaYolu(firma.slug);
+  return semaGrafigi([
+    {
+      "@type": "LocalBusiness",
+      name: firma.ad,
+      ...markaGorselleri(firma),
+      url: mutlakUrl(yol),
+      address: postaAdresi(firma, ilAdi),
+      areaServed: ilAdi,
+      sameAs: firma.webSitesi,
+    },
+    kirintiListesi([
+      { ad: icerik.ilSayfasi.breadcrumbAnasayfa, yol: "/" },
+      { ad: icerik.ilSayfasi.breadcrumbIl(ilAdi), yol: `/${ilSayfaSlug(firma.ilSlug)}` },
+      { ad: firma.ad, yol },
+    ]),
   ]);
 }
 

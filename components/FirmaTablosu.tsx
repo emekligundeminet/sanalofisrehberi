@@ -1,12 +1,16 @@
+import Link from "next/link";
 import type { Firma } from "@/data/firmalar";
 import { icerik } from "@/data/icerik";
 import { basHarfler, disLinkRel } from "@/lib/metin";
+import { firmaYolu } from "@/lib/veri";
+import { KonseptIkon } from "./KonseptMarka";
 import { OneCikanRozet } from "./Rozet";
 
 const metin = icerik.ilSayfasi;
 const sutun = metin.tabloSutunlar;
 
-export function Avatar({ ad }: { ad: string }) {
+export function Avatar({ ad, oneCikan = false }: { ad: string; oneCikan?: boolean }) {
+  if (oneCikan) return <KonseptIkon boyut={28} />;
   return (
     <span
       aria-hidden="true"
@@ -24,6 +28,24 @@ function semtKisa(semt: string): string {
 function tabloMetni(deger: string): string {
   if (deger === "Belirtilmemiş" || deger === "Yayımlanmamış") return "—";
   return deger;
+}
+
+function FirmaAdi({ firma }: { firma: Firma }) {
+  const icerik = (
+    <>
+      <Avatar ad={firma.ad} oneCikan={firma.oneCikan} />
+      <span className="min-w-0">{firma.ad}</span>
+      {firma.oneCikan && <OneCikanRozet kucuk />}
+    </>
+  );
+  if (!firma.profilVar) {
+    return <span className="flex items-center gap-2 text-baslik">{icerik}</span>;
+  }
+  return (
+    <Link href={firmaYolu(firma.slug)} className="flex items-center gap-2 text-baslik hover:text-vurgu">
+      {icerik}
+    </Link>
+  );
 }
 
 export function FirmaTablosu({ firmalar }: { firmalar: Firma[] }) {
@@ -45,11 +67,9 @@ export function FirmaTablosu({ firmalar }: { firmalar: Firma[] }) {
         ] as const;
         return (
           <li key={f.slug} className={`rounded-xl border p-4 ${f.oneCikan ? "border-olumlu bg-[#F0FDF4]" : "border-cizgi"}`}>
-            <a href={`#${f.slug}`} className="flex items-center gap-2 font-semibold text-baslik hover:text-vurgu">
-              <Avatar ad={f.ad} />
-              <span className="min-w-0">{f.ad}</span>
-              {f.oneCikan && <OneCikanRozet kucuk />}
-            </a>
+            <div className="font-semibold">
+              <FirmaAdi firma={f} />
+            </div>
             <dl className="mt-3 space-y-2 text-[14px] leading-snug">
               {alanlar.map(([etiket, deger]) => (
                 <div key={etiket}>
@@ -100,11 +120,7 @@ export function FirmaTablosu({ firmalar }: { firmalar: Firma[] }) {
             return (
             <tr key={f.slug}>
               <th scope="row" className={`${td} sticky left-0 z-[5] text-left text-[15px] font-semibold ${f.oneCikan ? zemin : ilkSutun}`}>
-                <a href={`#${f.slug}`} className="flex items-center gap-2 text-baslik hover:text-vurgu">
-                  <Avatar ad={f.ad} />
-                  <span>{f.ad}</span>
-                  {f.oneCikan && <OneCikanRozet kucuk />}
-                </a>
+                <FirmaAdi firma={f} />
               </th>
               <td className={`${td} ${zemin}`}>
                 <span className={`${hucre} font-sans font-semibold leading-snug tracking-[-0.02em] tabular-nums text-baslik`}>{f.fiyatGosterim}</span>

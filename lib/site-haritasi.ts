@@ -1,8 +1,8 @@
 import { icerik, site } from "@/data/icerik";
 import { firmalar } from "@/data/firmalar";
-import { aktifIller, enGuncelTarih, mutlakUrl } from "@/lib/veri";
+import { aktifIller, enGuncelTarih, firmaYolu, mutlakUrl, profilFirmalari } from "@/lib/veri";
 
-export type SiteHaritaKaydi = { loc: string; lastmod: string };
+export type SiteHaritaKaydi = { loc: string; lastmod: string; priority?: string };
 
 function enYeni(tarihler: string[]): string {
   return tarihler.reduce((enIyi, tarih) => (tarih > enIyi ? tarih : enIyi));
@@ -12,6 +12,14 @@ export function ilSayfalari(): SiteHaritaKaydi[] {
   return aktifIller().map((il) => ({
     loc: mutlakUrl(il.yol),
     lastmod: enGuncelTarih(il.firmalar).iso,
+  }));
+}
+
+export function firmaSayfalari(): SiteHaritaKaydi[] {
+  return profilFirmalari().map((firma) => ({
+    loc: mutlakUrl(firmaYolu(firma.slug)),
+    lastmod: firma.guncellemeISO,
+    priority: firma.oneCikan ? "0.9" : "0.3",
   }));
 }
 
@@ -30,7 +38,10 @@ function kacis(deger: string): string {
 
 export function urlKumesi(kayitlar: SiteHaritaKaydi[]): string {
   const satirlar = kayitlar
-    .map((k) => `  <url>\n    <loc>${kacis(k.loc)}</loc>\n    <lastmod>${k.lastmod}</lastmod>\n  </url>`)
+    .map((k) => {
+      const oncelik = k.priority ? `\n    <priority>${k.priority}</priority>` : "";
+      return `  <url>\n    <loc>${kacis(k.loc)}</loc>\n    <lastmod>${k.lastmod}</lastmod>${oncelik}\n  </url>`;
+    })
     .join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${satirlar}\n</urlset>\n`;
 }
@@ -39,6 +50,7 @@ export function siteHaritaIndeksi(): string {
   const dosyalar = [
     { loc: `${site.url}/sitemaps/iller.xml`, lastmod: enYeni(ilSayfalari().map((k) => k.lastmod)) },
     { loc: `${site.url}/sitemaps/sayfalar.xml`, lastmod: enYeni(sabitSayfalar().map((k) => k.lastmod)) },
+    { loc: `${site.url}/sitemaps/firmalar.xml`, lastmod: enYeni(firmaSayfalari().map((k) => k.lastmod)) },
   ];
   const satirlar = dosyalar
     .map((d) => `  <sitemap>\n    <loc>${kacis(d.loc)}</loc>\n    <lastmod>${d.lastmod}</lastmod>\n  </sitemap>`)

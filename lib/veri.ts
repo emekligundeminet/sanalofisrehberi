@@ -17,6 +17,22 @@ export function ilSayfaSlug(ilSlug: string): string {
   return `${ilSlug}${IL_SAYFA_EKI}`;
 }
 
+export function firmaYolu(slug: string): string {
+  return `/firma/${slug}`;
+}
+
+export function profilFirmalari(): Firma[] {
+  return firmalar.filter((firma) => firma.profilVar);
+}
+
+export function slugdanFirma(slug: string): Firma | undefined {
+  return firmalar.find((firma) => firma.slug === slug && firma.profilVar);
+}
+
+export function oneCikanFirma(): Firma | undefined {
+  return firmalar.find((firma) => firma.oneCikan && firma.profilVar);
+}
+
 export function aktifIller(): AktifIl[] {
   return iller
     .map((il) => {

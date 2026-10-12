@@ -37,6 +37,18 @@ export const icerik = {
       yakinda: "Yakında",
       firmaSayisi: (firmaSayisi: number) => `${firmaSayisi} firma`,
     },
+    oneCikanBant: {
+      etiket: "ÖNE ÇIKAN",
+      baslik: "Editörün Öne Çıkardığı Firma",
+      rozet: "EDİTÖR SEÇİMİ",
+      yer: "Çankaya · Mahall Ankara",
+      dogrulama: "Doğrulanmış fiyat",
+      ozellikler: ["800 TL + KDV / ay", "Aynı gün tebligat bildirimi", "Saatlik toplantı ve makam odası"],
+      link: "Firmayı İncele →",
+      disLink: "konseptofis.com",
+      disLinkAria: "konseptofis.com (yeni sekmede açılır)",
+      not: "Fiyatını web sitesinde açıkça yayımlayan ve aynı gün tebligat bildirimi sunan firmalar editör değerlendirmesiyle öne çıkarılır.",
+    },
     illerBaslik: "İllere Göre Sanal Ofis Firmaları",
     enDusukEtiket: "Yayımlanan en düşük aylık fiyat",
     fiyatTablosu: {
@@ -177,6 +189,39 @@ Adres, tebligat ve sözleşme maddelerini tek tek kontrol etmek için hazırlad�
       "Diğer iller için sayfalar hazırlanıyor. Bir ilde en az üç firmanın bilgisi derlendiğinde o ilin sayfası yayımlanır.",
     anasayfayaDon: "Tüm iller ve harita →",
     itemListAdi: (il: string) => `${il} sanal ofis firmaları`,
+  },
+
+  firma: {
+    title: (ad: string, semt: string) => `${ad} – ${semt} Sanal Ofis | Fiyat ve İletişim`,
+    description: (ad: string, semt: string, fiyat: string) =>
+      `${ad} (${semt}) sanal ofis: yayımlanan fiyat ${fiyat}. Adres, toplantı odası ve tebligat bilgisi.`,
+    altSatir: (semt: string, tarih: string) =>
+      `${semt} · Sanal ofis sağlayıcısı · Son güncelleme ${tarih}`,
+    editorSecimi: "Editör Seçimi",
+    oneCikanlar: "Öne çıkanlar",
+    dikkat: "Dikkat",
+    hizmetler: "Hizmetler",
+    hakkinda: (ad: string) => `${ad} Hakkında`,
+    ozet: {
+      fiyat: "Aylık fiyat",
+      toplanti: "Toplantı odası",
+      tebligat: "Tebligat",
+      adres: "Adres",
+    },
+    webSitesi: "Web Sitesi →",
+    webSitesiAria: (ad: string) => `Web sitesi: ${ad} (yeni sekmede açılır)`,
+    resmiSite: "Resmi Web Sitesi →",
+    resmiSiteAria: (ad: string) => `Resmi web sitesi: ${ad} (yeni sekmede açılır)`,
+    teklifAl: "Teklif Al",
+    teklifAlAria: (ad: string) => `Teklif al: ${ad} (yeni sekmede açılır)`,
+    kaynakNot: (tarih: string) =>
+      `Bilgiler firmanın web sitesinden ${tarih} itibarıyla derlenmiştir.`,
+    konseptKart: {
+      baslik: "Çankaya'da öne çıkan",
+      cumle:
+        "Aylık fiyatını sitesinde açıkça yayımlıyor; tebligat aynı gün bildiriliyor ve toplantı odası saatlik kiralanabiliyor.",
+      link: "İncele →",
+    },
   },
 
   olcutler: [
@@ -546,6 +591,8 @@ Sağlayıcının ne kadar süredir bu hizmeti verdiğine, binada gerçekten bir 
 Adresin konumu iki şeyi etkiler: müşterilerinizde bıraktığı izlenim ve yüz yüze görüşmelerin kolaylığı. Adresi yalnızca vergi levhası ve ticaret sicil için kullanacaksanız merkezi olmayan, daha uygun fiyatlı bir adres yeterli olabilir. Kartvizitte ve tekliflerde kullanacak, müşteri kabul edecekseniz iş merkezindeki resepsiyonlu bir adres daha doğru bir seçim olur.
 
 Adresin bağlı olduğu vergi dairesini de sorun. Muhasebecinizin sık çalıştığı vergi dairesiyle aynı yerde olmak işlemleri kolaylaştırabilir.
+
+Yayımlanan fiyat ve tebligat koşullarına bir örnek için [Çankaya'da sanal ofis](/firma/konsept-ofis) profiline bakabilirsiniz.
 
 ### Tebligat, posta ve kargo hizmetleri
 

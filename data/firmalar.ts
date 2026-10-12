@@ -22,26 +22,30 @@ export type Firma = {
   rozet: string;
   artilar: string[];
   dikkat: string[];
+  profilVar: boolean;
   oneCikan?: boolean;
+  uzunAciklama?: string;
+  calismaSaatleri?: string;
   toplantiOdasiKisa: string;
   tebligatKisa: string;
 };
 
 export const firmalar: Firma[] = [
 {
- ilSlug:"ankara", sira:1, slug:"konsept-ofis", ad:"Konsept Ofis", semt:"Çankaya (Mahall Ankara)", oneCikan:true,
+ profilVar:true, ilSlug:"ankara", sira:1, slug:"konsept-ofis", ad:"Konsept Ofis", semt:"Çankaya (Mahall Ankara)", oneCikan:true,
  adres:"Mahall Ankara, Mustafa Kemal, Dumlupınar Blv. No:274/2 C2 Blok No:47, 06570 Çankaya/Ankara",
  aylikFiyat:"800 TL + KDV", aylikMin:800, fiyatGosterim:"800 TL + KDV", fiyatDogrulandi:true, toplantiOdasi:"Var, yıllık abonelere saatlik 500 TL + KDV", tebligatBildirimi:"Aynı gün, anlık bilgilendirme",
  toplantiOdasiKisa:"Saatlik (yıllık abone)", tebligatKisa:"Aynı gün",
  hizmetler:["Vergi levhası ve ticaret sicil adresi","Posta ve kargo teslim alma","Tebligat takibi ve anlık bilgilendirme","Makam odası ve toplantı odası"],
  degerlendirme:"Dumlupınar Bulvarı üzerindeki Mahall Ankara iş merkezinde, resepsiyonlu bir adres sunuyor. Aylık fiyatını sitesinde açıkça yayımlıyor; stopaj ve aidat alınmadığını belirtiyor. Yüz yüze görüşmeler için makam odası ve toplantı odası saatlik kiralanabiliyor.",
+ uzunAciklama:"Konsept Ofis, Çankaya'daki Mahall Ankara iş merkezinde sanal ofis hizmeti veren bir sağlayıcıdır. Aylık fiyatını web sitesinde açıkça yayımlar; stopaj ve aidat alınmadığını belirtir. Şirket adına gelen posta, kargo ve tebligatlar resepsiyonda teslim alınır ve aynı gün bildirilir.\n\nYıllık abonelerine saatlik ücretle makam odası ve toplantı odası sunar. Dumlupınar Bulvarı üzerindeki konumu, metroya ve Çankaya'daki kamu kurumlarına yakınlığıyla kurumsal adres arayan şirketler için tercih edilen bir noktadır.",
  webSitesi:"https://konseptofis.com", dofollow:true, kaynakUrl:"https://konseptofis.com", guncellemeTarihi:"Ekim 2026", guncellemeISO:"2026-10-05",
  rozet:"Fiyatı şeffaf",
  artilar:["Aylık fiyat sitede açıkça yayımlanıyor","Stopaj ve aidat alınmadığı belirtiliyor","Resepsiyonlu iş merkezi, aynı gün tebligat bildirimi","Saatlik makam odası ve toplantı odası"],
  dikkat:["Toplantı ve makam odası yalnızca yıllık abonelere açık","Tek lokasyon (Mahall Ankara)"]
 },
 {
- ilSlug:"ankara", sira:2, slug:"amfora-ofis", ad:"Amfora Ofis", semt:"Balgat / Kızılay",
+ profilVar:true, ilSlug:"ankara", sira:2, slug:"amfora-ofis", ad:"Amfora Ofis", semt:"Balgat / Kızılay",
  adres:"Yapım İş Merkezi No:35/7, Balgat-Çankaya, 06520 Ankara",
  aylikFiyat:"700 TL", aylikMin:700, fiyatGosterim:"700 TL", fiyatDogrulandi:false, toplantiOdasi:"Ayda 4 saat oda veya toplantı salonu kullanımı pakete dahil", tebligatBildirimi:"Posta ve kargolar karşılanıp haber veriliyor",
  toplantiOdasiKisa:"Ayda 4 saat dahil", tebligatKisa:"Bildirim var",
@@ -53,7 +57,7 @@ export const firmalar: Firma[] = [
  dikkat:["Fiyatın KDV dahil olup olmadığı belirtilmemiş","Tebligat bildirim süresi belirtilmemiş"]
 },
 {
- ilSlug:"ankara", sira:3, slug:"startup-ofis", ad:"StartUp Ofis", semt:"Balgat",
+ profilVar:true, ilSlug:"ankara", sira:3, slug:"startup-ofis", ad:"StartUp Ofis", semt:"Balgat",
  adres:"No:11 Balgat, Çankaya/Ankara",
  aylikFiyat:"450 TL", aylikMin:450, fiyatGosterim:"450 TL", fiyatDogrulandi:false, toplantiOdasi:"Ayda 1 gün toplantı salonu kullanımı", tebligatBildirimi:"Çağrı, posta ve kargolar karşılanıp bildiriliyor",
  toplantiOdasiKisa:"Ayda 1 gün dahil", tebligatKisa:"Bildirim var",
@@ -65,7 +69,7 @@ export const firmalar: Firma[] = [
  dikkat:["Fiyat bilgisi güncelliğini sitede kontrol edin","Tek lokasyon (Balgat)"]
 },
 {
- ilSlug:"ankara", sira:4, slug:"open-ofis", ad:"Open Ofis", semt:"Ankara",
+ profilVar:false, ilSlug:"ankara", sira:4, slug:"open-ofis", ad:"Open Ofis", semt:"Ankara",
  adres:"Yayımlanmamış",
  aylikFiyat:"Yıllık 7.000 TL + KDV", aylikMin:null, fiyatGosterim:"Yıllık 7.000 TL + KDV", fiyatDogrulandi:false, toplantiOdasi:"Belirtilmemiş", tebligatBildirimi:"Belirtilmemiş",
  toplantiOdasiKisa:"Belirtilmemiş", tebligatKisa:"Belirtilmemiş",
@@ -77,7 +81,7 @@ export const firmalar: Firma[] = [
  dikkat:["Adres sitede açıkça belirtilmemiş","Toplantı odası ve tebligat koşulları belirtilmemiş"]
 },
 {
- ilSlug:"ankara", sira:5, slug:"logos-ofis", ad:"Logos Ofis", semt:"Emek",
+ profilVar:true, ilSlug:"ankara", sira:5, slug:"logos-ofis", ad:"Logos Ofis", semt:"Emek",
  adres:"Emek Mah., Bişkek Cad., MTC Plaza No:125-127 D:16, 06510 Çankaya/Ankara",
  aylikFiyat:"Yayımlanmamış", aylikMin:null, fiyatGosterim:"—", fiyatDogrulandi:false, toplantiOdasi:"Var", tebligatBildirimi:"Belirtilmemiş",
  toplantiOdasiKisa:"Var", tebligatKisa:"Belirtilmemiş",
@@ -89,7 +93,7 @@ export const firmalar: Firma[] = [
  dikkat:["Sanal ofis fiyatı sitede yayımlanmıyor"]
 },
 {
- ilSlug:"ankara", sira:6, slug:"prestij-ofis", ad:"Prestij Ofis", semt:"Gaziosmanpaşa",
+ profilVar:true, ilSlug:"ankara", sira:6, slug:"prestij-ofis", ad:"Prestij Ofis", semt:"Gaziosmanpaşa",
  adres:"No:153/8 Gaziosmanpaşa, Çankaya/Ankara",
  aylikFiyat:"Yayımlanmamış", aylikMin:null, fiyatGosterim:"—", fiyatDogrulandi:false, toplantiOdasi:"Var", tebligatBildirimi:"Belirtilmemiş",
  toplantiOdasiKisa:"Var", tebligatKisa:"Belirtilmemiş",
@@ -101,7 +105,7 @@ export const firmalar: Firma[] = [
  dikkat:["Sanal ofis fiyatı sitede yayımlanmıyor"]
 },
 {
- ilSlug:"ankara", sira:7, slug:"ankara-sanal-ofis", ad:"Ankara Sanal Ofis", semt:"Çankaya",
+ profilVar:false, ilSlug:"ankara", sira:7, slug:"ankara-sanal-ofis", ad:"Ankara Sanal Ofis", semt:"Çankaya",
  adres:"No:36/6 Çankaya/Ankara",
  aylikFiyat:"Yayımlanmamış", aylikMin:null, fiyatGosterim:"—", fiyatDogrulandi:false, toplantiOdasi:"Belirtilmemiş", tebligatBildirimi:"Belirtilmemiş",
  toplantiOdasiKisa:"Belirtilmemiş", tebligatKisa:"Belirtilmemiş",
@@ -113,7 +117,7 @@ export const firmalar: Firma[] = [
  dikkat:["Sanal ofis fiyatı sitede yayımlanmıyor","Toplantı odası koşulları belirtilmemiş"]
 },
 {
- ilSlug:"ankara", sira:8, slug:"regus-ankara", ad:"Regus", semt:"Çeşitli lokasyonlar",
+ profilVar:true, ilSlug:"ankara", sira:8, slug:"regus-ankara", ad:"Regus", semt:"Çeşitli lokasyonlar",
  adres:"Ankara'da birden fazla iş merkezi",
  aylikFiyat:"Günlük fiyatlandırma (sitesinde günlük 64 TL'den başladığı belirtiliyor)", aylikMin:null, fiyatGosterim:"Günlük fiyat", fiyatDogrulandi:false, toplantiOdasi:"Var, ayrı ücretli", tebligatBildirimi:"Posta yönlendirme",
  toplantiOdasiKisa:"Ayrı ücretli", tebligatKisa:"Posta yönlendirme",
@@ -125,7 +129,7 @@ export const firmalar: Firma[] = [
  dikkat:["Fiyatlar günlük bazda gösteriliyor, aylık toplamı hesaplamak gerekiyor","Toplantı odası ayrı ücretli"]
 },
 {
- ilSlug:"istanbul", sira:1, slug:"workon-istanbul", ad:"Workon", semt:"İstanbul",
+ profilVar:false, ilSlug:"istanbul", sira:1, slug:"workon-istanbul", ad:"Workon", semt:"İstanbul",
  adres:"Belirtilmemiş",
  aylikFiyat:"590 TL + KDV (yıllık sözleşme)", aylikMin:590, fiyatGosterim:"590 TL + KDV", fiyatDogrulandi:true, toplantiOdasi:"Belirtilmemiş", tebligatBildirimi:"Resmî evrak bildirimi sözleşme kapsamında",
  toplantiOdasiKisa:"Belirtilmemiş", tebligatKisa:"Resmî evrak bildirimi",
@@ -137,7 +141,7 @@ export const firmalar: Firma[] = [
  dikkat:["Yıllık sözleşme zorunlu","Adres sitede belirtilmemiş"]
 },
 {
- ilSlug:"istanbul", sira:2, slug:"olmadik-ofis-istanbul", ad:"Olmadık Ofis", semt:"Fatih (Balat) / Kadıköy (Caddebostan)",
+ profilVar:true, ilSlug:"istanbul", sira:2, slug:"olmadik-ofis-istanbul", ad:"Olmadık Ofis", semt:"Fatih (Balat) / Kadıköy (Caddebostan)",
  adres:"Balat, Hızır Çavuş Mescidi Sk. No:40/A, 34087 Fatih/İstanbul",
  aylikFiyat:"1.000 TL + KDV", aylikMin:1000, fiyatGosterim:"1.000 TL + KDV", fiyatDogrulandi:false, toplantiOdasi:"Toplantı odası erişimi var", tebligatBildirimi:"Posta yönetimi",
  toplantiOdasiKisa:"Toplantı odası var", tebligatKisa:"Posta yönetimi",
@@ -149,7 +153,7 @@ export const firmalar: Firma[] = [
  dikkat:["Balat konumu klasik iş merkezi değil"]
 },
 {
- ilSlug:"istanbul", sira:3, slug:"login-office-istanbul", ad:"Login Office", semt:"Anadolu Yakası",
+ profilVar:false, ilSlug:"istanbul", sira:3, slug:"login-office-istanbul", ad:"Login Office", semt:"Anadolu Yakası",
  adres:"Belirtilmemiş",
  aylikFiyat:"475 – 5.575 TL / ay (pakete göre)", aylikMin:475, fiyatGosterim:"475 TL'den", fiyatDogrulandi:false, fiyatNotu:"Pakete göre 5.575 TL'ye kadar", toplantiOdasi:"Üst paketlerde aylık 4 saat", tebligatBildirimi:"Kargo desteği",
  toplantiOdasiKisa:"Üst pakette 4 saat", tebligatKisa:"Kargo desteği",
@@ -161,7 +165,7 @@ export const firmalar: Firma[] = [
  dikkat:["Adres sitede net değil","KDV durumu belirtilmemiş"]
 },
 {
- ilSlug:"istanbul", sira:4, slug:"mukellef-istanbul", ad:"Mükellef", semt:"Ritim İstanbul",
+ profilVar:false, ilSlug:"istanbul", sira:4, slug:"mukellef-istanbul", ad:"Mükellef", semt:"Ritim İstanbul",
  adres:"Ritim İstanbul iş merkezi",
  aylikFiyat:"Yıllık 9.999 TL + KDV", aylikMin:null, fiyatGosterim:"Yıllık 9.999 TL + KDV", fiyatDogrulandi:false, toplantiOdasi:"Belirtilmemiş", tebligatBildirimi:"Posta karşılama",
  toplantiOdasiKisa:"Belirtilmemiş", tebligatKisa:"Posta karşılama",
@@ -173,7 +177,7 @@ export const firmalar: Firma[] = [
  dikkat:["Sitede birden fazla fiyat gösterimi var; teklifte netleştirin"]
 },
 {
- ilSlug:"istanbul", sira:5, slug:"workoffice-istanbul", ad:"WorkOffice", semt:"İstanbul",
+ profilVar:false, ilSlug:"istanbul", sira:5, slug:"workoffice-istanbul", ad:"WorkOffice", semt:"İstanbul",
  adres:"Belirtilmemiş",
  aylikFiyat:"95 TL + KDV'den (Avantage); 1.600 – 8.500 TL + KDV üst paketler", aylikMin:95, fiyatGosterim:"95 TL + KDV'den", fiyatDogrulandi:false, fiyatNotu:"Üst paketler 1.600 – 8.500 TL + KDV", toplantiOdasi:"Üst paketlerde", tebligatBildirimi:"Adli ve idari tebligatlar dahil tüm posta teslim alınıyor",
  toplantiOdasiKisa:"Üst paketlerde", tebligatKisa:"Tüm posta teslim",
@@ -185,7 +189,7 @@ export const firmalar: Firma[] = [
  dikkat:["Giriş fiyatı kampanyalı olabilir, güncelliğini kontrol edin"]
 },
 {
- ilSlug:"istanbul", sira:6, slug:"is-ofis-istanbul", ad:"iş Ofis", semt:"İstanbul",
+ profilVar:false, ilSlug:"istanbul", sira:6, slug:"is-ofis-istanbul", ad:"iş Ofis", semt:"İstanbul",
  adres:"Belirtilmemiş",
  aylikFiyat:"125 TL + KDV (1 yıllık sözleşme)", aylikMin:125, fiyatGosterim:"125 TL + KDV", fiyatDogrulandi:false, toplantiOdasi:"Belirtilmemiş", tebligatBildirimi:"Belirtilmemiş",
  toplantiOdasiKisa:"Belirtilmemiş", tebligatKisa:"Belirtilmemiş",
@@ -197,7 +201,7 @@ export const firmalar: Firma[] = [
  dikkat:["Fiyat bilgisi eski olabilir","Adres sitede belirtilmemiş"]
 },
 {
- ilSlug:"izmir", sira:1, slug:"regus-izmir", ad:"Regus", semt:"Bayraklı (Folkart Towers)",
+ profilVar:true, ilSlug:"izmir", sira:1, slug:"regus-izmir", ad:"Regus", semt:"Bayraklı (Folkart Towers)",
  adres:"Folkart Towers, Adalet Mah. Kat:31, 35530 Bayraklı/İzmir",
  aylikFiyat:"220 TL'den (İş adresi) · 520 TL'den (Sanal Ofis) · 1.050 TL'den (Plus)", aylikMin:220, fiyatGosterim:"220 TL'den", fiyatDogrulandi:false, fiyatNotu:"Sanal Ofis 520 TL, Plus 1.050 TL'den", toplantiOdasi:"Plus pakette günlük toplantı odası", tebligatBildirimi:"Posta yönetimi",
  toplantiOdasiKisa:"Plus'ta günlük oda", tebligatKisa:"Posta yönetimi",
@@ -209,7 +213,7 @@ export const firmalar: Firma[] = [
  dikkat:["Toplantı odası yalnızca Plus pakette dahil"]
 },
 {
- ilSlug:"izmir", sira:2, slug:"ofis-arti-izmir", ad:"Ofis Artı (WorkPoint)", semt:"Bayraklı (Folkart Towers)",
+ profilVar:true, ilSlug:"izmir", sira:2, slug:"ofis-arti-izmir", ad:"Ofis Artı (WorkPoint)", semt:"Bayraklı (Folkart Towers)",
  adres:"Folkart Towers, Bayraklı/İzmir",
  aylikFiyat:"480 TL'den", aylikMin:480, fiyatGosterim:"480 TL'den", fiyatDogrulandi:false, toplantiOdasi:"Ek ücretle", tebligatBildirimi:"Posta takibi",
  toplantiOdasiKisa:"Ek ücretle", tebligatKisa:"Posta takibi",
@@ -221,7 +225,7 @@ export const firmalar: Firma[] = [
  dikkat:["Toplantı odası ek ücretli"]
 },
 {
- ilSlug:"izmir", sira:3, slug:"endless-office-izmir", ad:"Endless Office", semt:"Bayraklı (Folkart Towers)",
+ profilVar:true, ilSlug:"izmir", sira:3, slug:"endless-office-izmir", ad:"Endless Office", semt:"Bayraklı (Folkart Towers)",
  adres:"Folkart Towers, Bayraklı/İzmir",
  aylikFiyat:"12.000 TL + KDV'den (min. 1 yıl)", aylikMin:12000, fiyatGosterim:"12.000 TL + KDV", fiyatDogrulandi:false, fiyatNotu:"Min. 1 yıl", toplantiOdasi:"Belirtilmemiş", tebligatBildirimi:"Posta takibi",
  toplantiOdasiKisa:"Belirtilmemiş", tebligatKisa:"Posta takibi",
@@ -233,7 +237,7 @@ export const firmalar: Firma[] = [
  dikkat:["Listedeki en yüksek fiyat","Minimum 1 yıl sözleşme"]
 },
 {
- ilSlug:"izmir", sira:4, slug:"center-office-izmir", ad:"Center Office", semt:"Bayraklı",
+ profilVar:false, ilSlug:"izmir", sira:4, slug:"center-office-izmir", ad:"Center Office", semt:"Bayraklı",
  adres:"Bayraklı/İzmir",
  aylikFiyat:"Aylık 300 TL (eski kayıt, güncelliğini doğrulayın)", aylikMin:null, fiyatGosterim:"—", fiyatDogrulandi:false, toplantiOdasi:"Belirtilmemiş", tebligatBildirimi:"Belirtilmemiş",
  toplantiOdasiKisa:"Belirtilmemiş", tebligatKisa:"Belirtilmemiş",
@@ -245,7 +249,7 @@ export const firmalar: Firma[] = [
  dikkat:["Fiyat bilgisi güncel olmayabilir"]
 },
 {
- ilSlug:"bursa", sira:1, slug:"regus-bursa", ad:"Regus", semt:"Osmangazi",
+ profilVar:true, ilSlug:"bursa", sira:1, slug:"regus-bursa", ad:"Regus", semt:"Osmangazi",
  adres:"Fethiye Sanayi Cad. No:263 Kat:3, 16140 Bursa",
  aylikFiyat:"190 TL'den (İş adresi) · 420 TL'den (Sanal Ofis) · 780 TL'den (Plus)", aylikMin:190, fiyatGosterim:"190 TL'den", fiyatDogrulandi:false, fiyatNotu:"Sanal Ofis 420 TL, Plus 780 TL'den", toplantiOdasi:"Plus pakette günlük toplantı odası", tebligatBildirimi:"Posta yönetimi",
  toplantiOdasiKisa:"Plus'ta günlük oda", tebligatKisa:"Posta yönetimi",
@@ -257,7 +261,7 @@ export const firmalar: Firma[] = [
  dikkat:["Toplantı odası yalnızca Plus pakette dahil"]
 },
 {
- ilSlug:"bursa", sira:2, slug:"ofis-arti-bursa", ad:"Ofis Artı (WorkPoint)", semt:"Bursa",
+ profilVar:false, ilSlug:"bursa", sira:2, slug:"ofis-arti-bursa", ad:"Ofis Artı (WorkPoint)", semt:"Bursa",
  adres:"Belirtilmemiş",
  aylikFiyat:"480 TL'den", aylikMin:480, fiyatGosterim:"480 TL'den", fiyatDogrulandi:false, toplantiOdasi:"Ek ücretle", tebligatBildirimi:"Posta takibi",
  toplantiOdasiKisa:"Ek ücretle", tebligatKisa:"Posta takibi",
@@ -269,7 +273,7 @@ export const firmalar: Firma[] = [
  dikkat:["Adres sitede net değil","Toplantı odası ek ücretli"]
 },
 {
- ilSlug:"bursa", sira:3, slug:"bursa-office", ad:"Bursa Office", semt:"Osmangazi",
+ profilVar:true, ilSlug:"bursa", sira:3, slug:"bursa-office", ad:"Bursa Office", semt:"Osmangazi",
  adres:"Yeni Karaman Mah. Sanayi Cad. No:150/A Osmangazi/Bursa",
  aylikFiyat:"Yayımlanmamış", aylikMin:null, fiyatGosterim:"—", fiyatDogrulandi:false, toplantiOdasi:"Var", tebligatBildirimi:"Belirtilmemiş",
  toplantiOdasiKisa:"Var", tebligatKisa:"Belirtilmemiş",
@@ -281,7 +285,7 @@ export const firmalar: Firma[] = [
  dikkat:["Fiyat yayımlanmıyor"]
 },
 {
- ilSlug:"bursa", sira:4, slug:"office-16-bursa", ad:"Office 16", semt:"Nilüfer",
+ profilVar:true, ilSlug:"bursa", sira:4, slug:"office-16-bursa", ad:"Office 16", semt:"Nilüfer",
  adres:"Konak Mah. Badem (120) Sk. Yılmar Plaza No:2 Kat:4 D:4 Nilüfer/Bursa",
  aylikFiyat:"Yayımlanmamış", aylikMin:null, fiyatGosterim:"—", fiyatDogrulandi:false, toplantiOdasi:"Var", tebligatBildirimi:"Posta yönetimi",
  toplantiOdasiKisa:"Var", tebligatKisa:"Posta yönetimi",
@@ -293,7 +297,7 @@ export const firmalar: Firma[] = [
  dikkat:["Fiyat yayımlanmıyor"]
 },
 {
- ilSlug:"bursa", sira:5, slug:"campus-plus-bursa", ad:"Campus+", semt:"Nilüfer",
+ profilVar:false, ilSlug:"bursa", sira:5, slug:"campus-plus-bursa", ad:"Campus+", semt:"Nilüfer",
  adres:"Üçevler Mah. Ersan Sk. No:8/A Nilüfer/Bursa",
  aylikFiyat:"Yayımlanmamış", aylikMin:null, fiyatGosterim:"—", fiyatDogrulandi:false, toplantiOdasi:"Belirtilmemiş", tebligatBildirimi:"Kargo karşılama",
  toplantiOdasiKisa:"Belirtilmemiş", tebligatKisa:"Kargo karşılama",
@@ -305,7 +309,7 @@ export const firmalar: Firma[] = [
  dikkat:["Fiyat yayımlanmıyor"]
 },
 {
- ilSlug:"bursa", sira:6, slug:"is-ofis-bursa", ad:"iş Ofis", semt:"Bursa",
+ profilVar:false, ilSlug:"bursa", sira:6, slug:"is-ofis-bursa", ad:"iş Ofis", semt:"Bursa",
  adres:"Belirtilmemiş",
  aylikFiyat:"125 TL + KDV (1 yıllık sözleşme)", aylikMin:125, fiyatGosterim:"125 TL + KDV", fiyatDogrulandi:false, toplantiOdasi:"Belirtilmemiş", tebligatBildirimi:"Belirtilmemiş",
  toplantiOdasiKisa:"Belirtilmemiş", tebligatKisa:"Belirtilmemiş",

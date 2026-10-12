@@ -1,18 +1,19 @@
-import { BadgePercent, Building2, Clock, FileText, Mail, MapPin, Receipt, Users, type LucideIcon } from "lucide-react";
+import { BadgeCheck, BadgePercent, Building2, Clock, FileText, Mail, MapPin, Receipt, Users, Wallet, type LucideIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BaglantiliMetin } from "@/components/BaglantiliMetin";
 import { Bolum } from "@/components/Bolum";
 import { IlArama } from "@/components/IlArama";
 import { JsonLd } from "@/components/JsonLd";
+import { KonseptIkon, KonseptLogo } from "@/components/KonseptMarka";
 import { Sss } from "@/components/Sss";
 import { TurkiyeHaritasi } from "@/components/TurkiyeHaritasi";
 import { icerik } from "@/data/icerik";
 import { iller } from "@/data/iller";
-import { aramaAnahtari, metinBloklari, type MetinBlok } from "@/lib/metin";
+import { aramaAnahtari, disLinkRel, metinBloklari, type MetinBlok } from "@/lib/metin";
 import { anaSayfaSemasi } from "@/lib/schema";
 import { sayfaMetadata } from "@/lib/seo";
-import { aktifIller, enDusukYayimlananAylik, type AktifIl } from "@/lib/veri";
+import { aktifIller, enDusukYayimlananAylik, firmaYolu, oneCikanFirma, type AktifIl } from "@/lib/veri";
 
 const metin = icerik.anasayfa;
 const nedirIkonlari: LucideIcon[] = [MapPin, Mail, Users];
@@ -118,6 +119,73 @@ function SeoMetni({ kaynak, tablo }: { kaynak: string; tablo: React.ReactNode })
   );
 }
 
+const oneCikanIkonlari: LucideIcon[] = [Wallet, Clock, Users];
+
+function OneCikanBant() {
+  const firma = oneCikanFirma();
+  if (!firma) return null;
+  const bant = metin.oneCikanBant;
+  return (
+    <section className="mt-14" aria-labelledby="one-cikan-baslik">
+      <div className="mx-auto max-w-[680px]">
+        <p className="text-[11px] font-semibold tracking-[0.08em] text-vurgu">{bant.etiket}</p>
+        <h2 id="one-cikan-baslik" className="mt-1.5">{bant.baslik}</h2>
+        <article className="mt-5 overflow-hidden rounded-[16px] border border-cizgi border-l-4 border-l-olumlu bg-zemin shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
+          <div className="flex flex-col sm:flex-row">
+            <div className="flex items-start bg-[#F0FDF4] px-5 py-3 sm:w-16 sm:items-start sm:justify-center sm:px-2 sm:py-5">
+              <span className="rounded-full bg-olumlu px-2.5 py-1 text-[11px] font-semibold leading-none text-white shadow-[0_1px_3px_rgba(0,0,0,0.16)] sm:px-1.5 sm:py-3 sm:[writing-mode:vertical-rl] sm:rotate-180">
+                {bant.rozet}
+              </span>
+            </div>
+            <div className="min-w-0 flex-1 p-7">
+              <div className="flex items-start gap-3">
+                <KonseptIkon boyut={40} />
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-start justify-between gap-3">
+                    <KonseptLogo yukseklik={24} />
+                    <p className="flex shrink-0 items-center gap-1 pt-1 text-[12px] font-medium leading-none text-olumlu">
+                      <BadgeCheck size={15} aria-hidden="true" />
+                      {bant.dogrulama}
+                    </p>
+                  </div>
+                  <p className="whitespace-nowrap text-[14px] leading-snug text-soluk">{bant.yer}</p>
+                </div>
+              </div>
+              <ul className="mt-5 space-y-2">
+                {bant.ozellikler.map((satir, i) => {
+                  const Ikon = oneCikanIkonlari[i];
+                  return (
+                    <li key={satir} className="flex items-center gap-2.5 text-[15px] leading-snug text-metin">
+                      <Ikon size={18} aria-hidden="true" className="shrink-0 text-vurgu" />
+                      <span className="min-w-0">{satir}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+              <Link
+                href={firmaYolu(firma.slug)}
+                className="mt-6 flex w-full items-center justify-center rounded-[10px] bg-vurgu px-5 py-3 text-[15px] font-semibold text-white hover:bg-vurgu-koyu"
+              >
+                {bant.link}
+              </Link>
+              <a
+                href={firma.webSitesi}
+                target="_blank"
+                rel={disLinkRel(true)}
+                aria-label={bant.disLinkAria}
+                className="mt-2 block text-center text-[13px] text-soluk hover:text-vurgu"
+              >
+                {bant.disLink}
+              </a>
+            </div>
+          </div>
+        </article>
+        <p className="mt-3 text-center text-[13px] leading-snug text-soluk">{bant.not}</p>
+      </div>
+    </section>
+  );
+}
+
 export const metadata: Metadata = sayfaMetadata({ ...metin.meta, yol: "/" });
 
 const KART_ILLERI = ["ankara", "istanbul", "izmir"];
@@ -164,6 +232,7 @@ export default function AnaSayfa() {
       </div>
 
       <div className="kap">
+        <OneCikanBant />
         <Bolum id="iller" baslik={metin.illerBaslik} className="mt-14">
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {kartlar.map((il) => {
